@@ -9,21 +9,23 @@ import uy.edu.ort.arqliv.obligatorio.client.menus.MenuFirstLoader;
 import uy.edu.ort.arqliv.obligatorio.client.menus.MenuLogin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 
-
 /**
- *
+ * 
  * @author rodrigo
  */
 public class DemoConsole {
 
-    public static void main(String[] args) {
-        // Local variable
-        Renderer login = new MenuLogin();
-      
-       MenuFirstLoader menuPrincipal = new MenuFirstLoader();
-      menuPrincipal.addOptions("login", login);
-      
-      menuPrincipal.render();
-      
-    }
+	public static void main(String[] args) {
+
+		ContextSingleton.getInstance().init();
+		
+		// Local variable
+		Renderer login = new MenuLogin();
+
+		MenuFirstLoader menuPrincipal = new MenuFirstLoader();
+		menuPrincipal.addOptions("login", login);
+
+		menuPrincipal.render();
+
+	}
 }
