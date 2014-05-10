@@ -10,7 +10,6 @@ import uy.edu.ort.arqliv.obligatorio.client.menus.MenuLogin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 
 
-
 /**
  *
  * @author rodrigo

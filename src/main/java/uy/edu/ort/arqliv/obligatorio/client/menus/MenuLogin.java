@@ -25,7 +25,7 @@ public class MenuLogin implements Renderer {
     @Override
     public void render() {
 
-        System.out.print("\u001b[2J");
+//        System.out.print("\u001b[2J");
         // Display menu graphics
         System.out.println("============================");
         System.out.println("|          LOGIN           |");

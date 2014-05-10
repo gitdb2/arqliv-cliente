@@ -29,7 +29,7 @@ public class MenuFirstLoader implements Renderer {
         boolean exit = false;
         // Switch construct
         while (!exit) {
-            System.out.print("\u001b[2J");
+//            System.out.print("\u001b[2J");
             
             // Display menu graphics
             System.out.println("============================");
