@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
+import uy.edu.ort.arqliv.obligatorio.client.menus.types.MenuRendererEnum;
 
 /**
  *
@@ -16,22 +17,20 @@ import uy.edu.ort.arqliv.obligatorio.client.Keyin;
  */
 public class MenuFirstLoader implements Renderer {
 
-    Map<String, Renderer> options = new HashMap<>();
-
-    public void addOptions(String option, Renderer renderer) {
-        this.options.put(option, renderer);
-    }
+//    Map<MenuRendererEnum, Renderer> options = new HashMap<>();
+//
+//    public void addOptions(MenuRendererEnum option, Renderer renderer) {
+//        this.options.put(option, renderer);
+//    }
 
     @Override
     public void render() {
         int swValue;
 
         boolean exit = false;
-        // Switch construct
         while (!exit) {
 //            System.out.print("\u001b[2J");
             
-            // Display menu graphics
             System.out.println("============================");
             System.out.println("|   MENU SELECTION DEMO    |");
             System.out.println("============================");
@@ -44,12 +43,25 @@ public class MenuFirstLoader implements Renderer {
 
             switch (swValue) {
                 case 1:
-                    System.out.println("Option 1 selected");
-                    options.get("login").render();
+            		String usuario = Keyin.inString(" Usuario: ");
+            		if (!usuario.trim().isEmpty()) {
+            			new MenuMainScreen().render();
+        				System.out.println("Logueo Exitso");
+        				System.out.println("Llendo al menu Principal");
+        			} else {
+        				System.out.println("Error: usuario no puede estar en blanco");
+        			}
+
+//                	
+//                    System.out.println("Option 1 selected");
+//                    options.get("login").render();
                     break;
                 case 2:
                     System.out.println("Saliendo");
                     exit = true;
+                    break;
+                case 3:
+                	new MenuLogin().render();
                     break;
 
                 default:

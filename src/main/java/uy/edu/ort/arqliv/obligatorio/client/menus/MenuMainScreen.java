@@ -20,9 +20,9 @@ import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
  * 
  * @author rodrigo
  */
-public class MenuLogin implements Renderer {
+public class MenuMainScreen implements Renderer {
 
-	private final Logger log = LoggerFactory.getLogger(MenuLogin.class);
+	private final Logger log = LoggerFactory.getLogger(MenuMainScreen.class);
 
 	Map<String, Renderer> options = new HashMap<>();
 
