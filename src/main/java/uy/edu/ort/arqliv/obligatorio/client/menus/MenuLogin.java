@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.LoginServiceClient;
-import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 
 /**
  * 

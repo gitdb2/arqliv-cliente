@@ -13,10 +13,10 @@ public class ShipServiceClient {
 		this.shipService = shipService;
 	}
 	
-	public void createShip(Ship ship) throws CustomServiceException{
+	public Long createShip(Ship ship) throws CustomServiceException{
 		
 		ship = new Ship(11.0, 523, 55, "UY", 1978, "delicious");
-		shipService.store(MainSingleton.getInstance().getUser(), ship);
+		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 
 }

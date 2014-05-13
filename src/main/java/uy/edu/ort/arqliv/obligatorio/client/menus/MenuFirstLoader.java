@@ -5,11 +5,8 @@
  */
 package uy.edu.ort.arqliv.obligatorio.client.menus;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
-import uy.edu.ort.arqliv.obligatorio.client.menus.types.MenuRendererEnum;
+import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
 
 /**
  *
@@ -32,41 +29,34 @@ public class MenuFirstLoader implements Renderer {
 //            System.out.print("\u001b[2J");
             
             System.out.println("============================");
-            System.out.println("|   MENU SELECTION DEMO    |");
+            System.out.println("|       MENU INICIAL       |");
             System.out.println("============================");
-            System.out.println("| Optiones:                |");
+            System.out.println("| Opciones:                |");
             System.out.println("|        1. Login          |");
-            System.out.println("|        2. Salir          |");
+            System.out.println("|        0. Salir          |");
             System.out.println("============================");
             
-            swValue = Keyin.inInt(" Select option: ");
+            swValue = Keyin.inInt(" Seleccione una opcion: ");
 
             switch (swValue) {
                 case 1:
             		String usuario = Keyin.inString(" Usuario: ");
             		if (!usuario.trim().isEmpty()) {
+            			MainSingleton.getInstance().setUser(usuario);
             			new MenuMainScreen().render();
-        				System.out.println("Logueo Exitso");
-        				System.out.println("Llendo al menu Principal");
+        				System.out.println("Llendo al menu Principal...");
         			} else {
         				System.out.println("Error: usuario no puede estar en blanco");
         			}
-
-//                	
-//                    System.out.println("Option 1 selected");
-//                    options.get("login").render();
                     break;
-                case 2:
-                    System.out.println("Saliendo");
+                case 0:
+                    System.out.println("Saliendo...");
                     exit = true;
                     break;
-                case 3:
-                	new MenuLogin().render();
-                    break;
-
+            
                 default:
-                    System.out.println("Invalid selection");
-                    break; // This break is not really necessary
+                    System.out.println("Seleccion invalida");
+                    break;
             }
         }
     }

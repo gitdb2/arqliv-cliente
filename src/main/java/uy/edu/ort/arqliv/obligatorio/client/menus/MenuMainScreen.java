@@ -13,10 +13,9 @@ import org.slf4j.LoggerFactory;
 
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.LoginServiceClient;
+import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
-import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 
 /**
  * 
@@ -24,7 +23,7 @@ import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
  */
 public class MenuMainScreen implements Renderer {
 
-	private final Logger log = LoggerFactory.getLogger(MenuMainScreen.class);
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	Map<String, Renderer> options = new HashMap<>();
 
@@ -34,6 +33,57 @@ public class MenuMainScreen implements Renderer {
 
 	@Override
 	public void render() {
+		int swValue;
+
+		boolean exit = false;
+		while (!exit) {
+
+			System.out.println("============================");
+			System.out.println("|   MENU  PRINCIPAL        |");
+			System.out.println("============================");
+			System.out.println("| Optiones:                |");
+			System.out.println("|        1. Barcos         |");
+			System.out.println("|        2. Containers     |");
+			System.out.println("|        3. Arribos        |");
+			System.out.println("|        4. Reportes       |");
+			System.out.println("|        0. Salir          |");
+			System.out.println("============================");
+
+			swValue = Keyin.inInt(" Seleccione una opcion: ");
+
+			switch (swValue) {
+			case 0:
+				System.out.println("volviendo...");
+				exit = true;
+				break;
+			case 1:
+				System.out.println("abriendo menu Ship...");
+				new MenuShip().render();
+
+				break;
+			case 2:
+				System.out
+				.println("Error: Containers No implememtado aún");
+				break;
+			case 3:
+				System.out
+				.println("Error: Arribos No implememtado aún");
+				break;
+			case 4:
+				System.out
+				.println("Error: Reportes No implememtado aún");
+				break;
+
+
+			
+			default:
+				System.out.println("Invalid selection");
+				break; // This break is not really necessary
+			}
+		}
+	}
+
+	public void renderss() {
 
 		// System.out.print("\u001b[2J");
 		// Display menu graphics
@@ -46,8 +96,8 @@ public class MenuMainScreen implements Renderer {
 		// System.out.println("============================");
 		// swValue = Keyin.inInt(" Select option: ");
 
-//		String usuario = Keyin.inString(" Usuario: ");
-//		String password = Keyin.inString(" Password: ");
+		// String usuario = Keyin.inString(" Usuario: ");
+		// String password = Keyin.inString(" Password: ");
 
 		// if ("1".equals(usuario) && "1".equals(password)) {
 		//
@@ -57,16 +107,15 @@ public class MenuMainScreen implements Renderer {
 		// }
 
 		try {
-			
-			ShipServiceClient client = (ShipServiceClient) ContextSingleton.getInstance().getBean(RemoteClientesConstants.ShipClient);
-			
-			
+
+			ShipServiceClient client = (ShipServiceClient) ContextSingleton
+					.getInstance().getBean(RemoteClientesConstants.ShipClient);
+
 			client.createShip(null);
-		
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("Problema al contactar al server",e);
+			log.error("Problema al contactar al server", e);
 			System.out.println("Error: Al contactar al servidor");
 		}
 
