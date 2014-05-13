@@ -18,5 +18,15 @@
 	</bean>
 
 
+<!-- Servicio para ship INI-->
+	<bean id="shipClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient">
+		<property name="shipService" ref="shipService" />
+	</bean>
+
+	<bean id="shipService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://192.168.0.242:1199/ShipService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ShipService" />
+	</bean>
+<!-- Servicio para ship END-->
 
 </beans>

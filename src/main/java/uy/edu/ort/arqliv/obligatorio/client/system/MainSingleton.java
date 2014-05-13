@@ -6,7 +6,7 @@ public class MainSingleton {
 	
 	private MainSingleton(){}
 	
-	private String user;
+	private String user = "dummy";
 	
 	public static MainSingleton getInstance(){
 		return instance;

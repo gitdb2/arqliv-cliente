@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.LoginServiceClient;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 
 /**
@@ -44,8 +46,8 @@ public class MenuMainScreen implements Renderer {
 		// System.out.println("============================");
 		// swValue = Keyin.inInt(" Select option: ");
 
-		String usuario = Keyin.inString(" Usuario: ");
-		String password = Keyin.inString(" Password: ");
+//		String usuario = Keyin.inString(" Usuario: ");
+//		String password = Keyin.inString(" Password: ");
 
 		// if ("1".equals(usuario) && "1".equals(password)) {
 		//
@@ -56,17 +58,11 @@ public class MenuMainScreen implements Renderer {
 
 		try {
 			
-			LoginServiceClient loginClient = (LoginServiceClient) ContextSingleton.getInstance().getBean("loginClient");
+			ShipServiceClient client = (ShipServiceClient) ContextSingleton.getInstance().getBean(RemoteClientesConstants.ShipClient);
 			
 			
-			
-			boolean ok = loginClient.login(usuario, password);		
-			if (ok) {
-				System.out.println("Logueo Exitso");
-				System.out.println("Llendo al menu Principal");
-			} else {
-				System.out.println("Error: usuario o contrasena incorrecta");
-			}
+			client.createShip(null);
+		
 
 		} catch (Exception e) {
 			e.printStackTrace();
