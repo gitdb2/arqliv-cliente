@@ -2,7 +2,7 @@
 *.log
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-
+*.orig
 target/
 # Package Files #
 *.jar
