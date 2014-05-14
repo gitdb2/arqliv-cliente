@@ -40,8 +40,10 @@ public class MenuShip implements Renderer{
 				.println("Error:  No implememtado aún");
 				break;
 			case 3:
-				System.out
-				.println("Error:  No implememtado aún");
+				System.out.println("abriendo menu Modificar...");
+				new MenuShipUpdate().render();
+				
+			
 				break;
 			case 4:
 				System.out

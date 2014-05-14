@@ -10,18 +10,18 @@ import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConst
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
 import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
 
-public class MenuShipCreate implements Renderer {
+public class MenuShipDelete implements Renderer {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public void render() {
 
-		String name = Keyin.inString("Nombre (texto): ");
-		String flag = Keyin.inString("Bandera (texto): ");
-		int code = Keyin.inInt("Codigo (int): ");
-		int manufactoringYear = Keyin.inInt("Año Manuf. (int): ");
+		String name = Keyin.inString("Nombre (texto):       ");
+		String flag = Keyin.inString("Bandera (texto):      ");
+		int code = Keyin.inInt("Codigo (int):            ");
+		int manufactoringYear = Keyin.inInt("Año Manuf. (int):        ");
 		int crewQuantity = Keyin.inInt("Cant. tripulantes (int): ");
-		double capacity = Keyin.inDouble("Capacidad (double): ");
+		double capacity = Keyin.inDouble("Capacidad (double):   ");
 
 		Ship ship = new Ship(capacity, code, crewQuantity, flag,
 				manufactoringYear, name);

@@ -84,7 +84,27 @@ public class Keyin {
             }
         }
     }
-
+    /**
+     * Agregado para los updates poder controlar si no se modifica el valor
+     * @param prompt
+     * @return
+     */
+    public static Integer inIntAllowEmpty(String prompt) {
+        while (true) {
+            inputFlush();
+            printPrompt(prompt);
+            String inStr = inString().trim();
+            try {
+                return Integer.valueOf(inStr);
+            } catch (NumberFormatException e) {
+            	if(inStr.isEmpty()){
+            		return null;
+            	}
+                System.out.println("Invalid input. Not an integer");
+            }
+        }
+    }
+    
     public static char inChar(String prompt) {
         int aChar = 0;
 
@@ -100,6 +120,27 @@ public class Keyin {
         return (char) aChar;
     }
 
+    /**
+     * Agregado para los updates poder controlar si no se modifica el valor
+     * @param prompt
+     * @return
+     */
+    public static Double inDoubleAllowEmpty(String prompt) {
+        while (true) {
+            inputFlush();
+            printPrompt(prompt);
+            String inStr = inString().trim();
+            try {
+                return Double.valueOf(inStr);
+            } catch (NumberFormatException e) {
+            	if(inStr.isEmpty()){
+            		return null;
+            	}
+                System.out.println("Invalid input. Not a floating point number");
+            }
+        }
+    }
+    
     public static double inDouble(String prompt) {
         while (true) {
             inputFlush();
