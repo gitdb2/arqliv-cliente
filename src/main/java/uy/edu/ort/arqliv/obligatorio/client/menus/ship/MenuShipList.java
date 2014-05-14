@@ -36,7 +36,7 @@ public class MenuShipList implements Renderer {
 					.getInstance().getBean(
 							RemoteClientesConstants.ShipClient);
 			
-			List<Ship> ships = client.listShips();
+			List<Ship> ships = client.list();
 			
 			 System.out.printf(
 					  "%-15s"						//  ID

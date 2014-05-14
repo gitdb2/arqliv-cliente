@@ -29,7 +29,8 @@ public class Keyin {
 
     //Method to make sure no data is available in the
     //input stream
-    public static void inputFlush() {
+    @SuppressWarnings("unused")
+	public static void inputFlush() {
         int dummy;
         int bAvail;
 
@@ -38,7 +39,7 @@ public class Keyin {
                 dummy = System.in.read();
             }
         } catch (java.io.IOException e) {
-            System.out.println("Input error");
+            System.out.println("Error de Entrada");
         }
     }
 
@@ -66,7 +67,7 @@ public class Keyin {
                     s = s + (char) aChar; // Enter into string
                 }
             } catch (java.io.IOException e) {
-                System.out.println("Input error");
+                System.out.println("Error de Entrada");
                 finished = true;
             }
         }
@@ -80,7 +81,7 @@ public class Keyin {
             try {
                 return Integer.valueOf(inString().trim()).intValue();
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Not an integer");
+                System.out.println("Entrada invalida. No es un entero");
             }
         }
     }
@@ -100,7 +101,7 @@ public class Keyin {
             	if(inStr.isEmpty()){
             		return null;
             	}
-                System.out.println("Invalid input. Not an integer");
+                System.out.println("Entrada invalida. No es un entero");
             }
         }
     }
@@ -114,7 +115,7 @@ public class Keyin {
         try {
             aChar = System.in.read();
         } catch (java.io.IOException e) {
-            System.out.println("Input error");
+            System.out.println("Error de Entrada");
         }
         inputFlush();
         return (char) aChar;
@@ -136,7 +137,7 @@ public class Keyin {
             	if(inStr.isEmpty()){
             		return null;
             	}
-                System.out.println("Invalid input. Not a floating point number");
+                System.out.println("Entrada invalida. No es un numero Double");
             }
         }
     }
@@ -149,7 +150,7 @@ public class Keyin {
                 return Double.valueOf(inString().trim()).doubleValue();
             } catch (NumberFormatException e) {
                 System.out
-                        .println("Invalid input. Not a floating point number");
+                        .println("Entrada invalida. No es un numero Double");
             }
         }
     }

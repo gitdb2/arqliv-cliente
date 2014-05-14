@@ -111,7 +111,7 @@ public class MenuMainScreen implements Renderer {
 			ShipServiceClient client = (ShipServiceClient) ContextSingleton
 					.getInstance().getBean(RemoteClientesConstants.ShipClient);
 
-			client.createShip(null);
+			client.create(null);
 
 		} catch (Exception e) {
 			e.printStackTrace();

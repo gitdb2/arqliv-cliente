@@ -29,7 +29,7 @@ public class ShipServiceClient {
 	 * @return
 	 * @throws CustomServiceException
 	 */
-	public Long createShip(Ship ship) throws CustomServiceException {
+	public Long create(Ship ship) throws CustomServiceException {
 		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 	/**
@@ -37,7 +37,7 @@ public class ShipServiceClient {
 	 * @return
 	 * @throws CustomServiceException
 	 */
-	public List<Ship> listShips() throws CustomServiceException {
+	public List<Ship> list() throws CustomServiceException {
 		return shipService.list(MainSingleton.getInstance().getUser());
 	}
 	/**
@@ -46,7 +46,7 @@ public class ShipServiceClient {
 	 * @return
 	 * @throws CustomServiceException
 	 */
-	public Long updateShip(Ship ship) throws CustomServiceException {
+	public Long update(Ship ship) throws CustomServiceException {
 		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 
@@ -60,4 +60,12 @@ public class ShipServiceClient {
 		return shipService.find(MainSingleton.getInstance().getUser(), id);
 	}
 
+	/**
+	 * TODO
+	 * @param id
+	 * @throws CustomServiceException
+	 */
+	public void delete(long id) throws CustomServiceException {
+		shipService.delete(MainSingleton.getInstance().getUser(), id);
+	}
 }

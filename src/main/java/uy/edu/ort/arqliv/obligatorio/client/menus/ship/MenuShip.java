@@ -36,8 +36,9 @@ public class MenuShip implements Renderer{
 
 				break;
 			case 2:
-				System.out
-				.println("Error:  No implememtado aún");
+				System.out.println("abriendo menu Baja...");
+				new MenuShipDelete().render();
+				
 				break;
 			case 3:
 				System.out.println("abriendo menu Modificar...");

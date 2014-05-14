@@ -103,7 +103,7 @@ public class MenuShipUpdate implements Renderer {
 					case 'S':
 						try {
 							exit = true;
-							long idGenerated = client.updateShip(ship);
+							long idGenerated = client.update(ship);
 
 							System.out
 									.println("Barco Modificado correctamente, id: "

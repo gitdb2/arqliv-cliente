@@ -50,7 +50,7 @@ public class MenuShipCreate implements Renderer {
 							.getInstance().getBean(
 									RemoteClientesConstants.ShipClient);
 
-					Long idGenerated = client.createShip(ship);
+					Long idGenerated = client.create(ship);
 					System.out.println("Barco creado correctamente con id: "
 							+ idGenerated);
 
