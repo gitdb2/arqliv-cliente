@@ -23,6 +23,11 @@ public class ShipServiceClient {
 	public void setShipService(ShipService shipService) {
 		this.shipService = shipService;
 	}
+<<<<<<< HEAD
+	
+	public Long createShip(Ship ship) throws CustomServiceException{
+		//ship = new Ship(11.0, 523, 55, "UY", 1978, "delicious");
+=======
 	/**
 	 * TODO
 	 * @param ship
@@ -47,6 +52,7 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long updateShip(Ship ship) throws CustomServiceException {
+>>>>>>> 6ac7faf9dd942b295d1d68f6234bae93c203a317
 		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 
