@@ -1,5 +1,7 @@
 package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 
+import java.util.List;
+
 import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
 import uy.edu.ort.arqliv.obligatorio.common.ShipService;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
@@ -14,8 +16,15 @@ public class ShipServiceClient {
 	}
 	
 	public Long createShip(Ship ship) throws CustomServiceException{
-		
-		ship = new Ship(11.0, 523, 55, "UY", 1978, "delicious");
+	//	ship = new Ship(11.0, 523, 55, "UY", 1978, "delicious");
+		return shipService.store(MainSingleton.getInstance().getUser(), ship);
+	}
+	
+	public List<Ship> listShips()throws CustomServiceException{
+		return shipService.list(MainSingleton.getInstance().getUser());
+	}
+	
+	public Long updateShip(Ship ship) throws CustomServiceException{
 		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 

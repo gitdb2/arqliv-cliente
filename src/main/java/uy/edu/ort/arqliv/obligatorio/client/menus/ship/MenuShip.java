@@ -31,7 +31,7 @@ public class MenuShip implements Renderer{
 				exit = true;
 				break;
 			case 1:
-				System.out.println("abriendo menu Ship...");
+				System.out.println("abriendo menu Alta...");
 				new MenuShipCreate().render();
 
 				break;
@@ -45,7 +45,8 @@ public class MenuShip implements Renderer{
 				break;
 			case 4:
 				System.out
-				.println("Error:  No implememtado aún");
+				.println("Listando...");
+				new MenuShipList().render();
 				break;
 
 
