@@ -8,14 +8,14 @@
 
 
 
-	<bean id="loginClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.LoginServiceClient">
-		<property name="loginService" ref="loginService" />
-	</bean>
+<!-- 	<bean id="loginClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.LoginServiceClient"> -->
+<!-- 		<property name="loginService" ref="loginService" /> -->
+<!-- 	</bean> -->
 
-	<bean id="loginService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-		<property name="serviceUrl" value="rmi://192.168.1.139:1199/LoginService" />
-		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.LoginService" />
-	</bean>
+<!-- 	<bean id="loginService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean"> -->
+<!-- 		<property name="serviceUrl" value="rmi://192.168.1.139:1199/LoginService" /> -->
+<!-- 		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.LoginService" /> -->
+<!-- 	</bean> -->
 
 <!-- Servicio para ship INI-->
 	<bean id="shipClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient">
@@ -23,7 +23,7 @@
 	</bean>
 
 	<bean id="shipService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-		<property name="serviceUrl" value="rmi://192.168.1.139:1199/ShipService" />
+		<property name="serviceUrl" value="rmi://localhost:1199/ShipService" />
 		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ShipService" />
 	</bean>
 <!-- Servicio para ship END-->

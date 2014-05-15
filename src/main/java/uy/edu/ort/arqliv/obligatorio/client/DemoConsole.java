@@ -13,7 +13,7 @@ import uy.edu.ort.arqliv.obligatorio.client.menus.MenuFirstLoader;
  */
 public class DemoConsole {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)throws Exception {
 
 		ContextSingleton.getInstance().init();
 

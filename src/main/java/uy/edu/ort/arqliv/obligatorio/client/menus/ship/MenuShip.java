@@ -20,6 +20,7 @@ public class MenuShip implements Renderer{
 			System.out.println("|        2. Baja           |");
 			System.out.println("|        3. Modificar      |");
 			System.out.println("|        4. Listar         |");
+			System.out.println("|        5. Listar (pdf)   |");
 			System.out.println("|        0. Salir          |");
 			System.out.println("============================");
 
@@ -48,10 +49,14 @@ public class MenuShip implements Renderer{
 				break;
 			case 4:
 				System.out
-				.println("Listando...");
-				new MenuShipList().render();
+				.println("Listando Barcos...");
+				new MenuShipList(true).render();
 				break;
-
+			case 5:
+				System.out
+				.println("Generando PDF...");
+				new MenuShipList(false).render();
+				break;
 
 			
 			default:
