@@ -1,5 +1,9 @@
 package uy.edu.ort.arqliv.obligatorio.client.menus.ship;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +12,7 @@ import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
+import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomNotArrivedThatDateServiceException;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
 
@@ -22,10 +27,9 @@ public class MenuShipUpdate implements Renderer {
 	@Override
 	public void render() {
 
-		//
-		// Ship ship = new Ship(capacity, code, crewQuantity, flag,
-		// manufactoringYear, name);
-
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdfOut = new SimpleDateFormat("dd/MM/yyyy");
+		
 		ShipServiceClient client = (ShipServiceClient) ContextSingleton
 				.getInstance().getBean(RemoteClientesConstants.ShipClient);
 
@@ -36,12 +40,32 @@ public class MenuShipUpdate implements Renderer {
 			return;
 		}
 
+		String fechaArrival = "";
+		boolean fechaOk = false;
+		Date arrivalDate = null;
+
+		while (!fechaOk) {
+			fechaArrival = Keyin
+					.inString("Fecha para modificacion (yyyyMMdd) o 0 para salir: ");
+			if ("0".equals(fechaArrival.trim())) {
+				System.out.println("Cancelado...");
+				return;
+			}
+			try {
+				arrivalDate = sdf.parse(fechaArrival);
+				fechaOk = true;
+			} catch (ParseException e) {
+				System.out.println("Formato incorrecto.");
+			}
+		}
+
 		try {
 			Ship ship = client.find(id);
-			System.out.println("========================");
+			System.out.println("==================================");
 			System.out.println("========= Modificar id: " + id);
+			System.out.println("========= fecha arrivo: " +sdfOut.format(arrivalDate) );
 			System.out.println(ship.toStringConsola());
-			System.out.println("================================");
+			System.out.println("===================================");
 
 			String name = Keyin.inString("Nombre (" + ship.getName() + "): ");
 			String flag = Keyin.inString("Bandera (" + ship.getFlag() + "): ");
@@ -90,7 +114,7 @@ public class MenuShipUpdate implements Renderer {
 
 				boolean exit = false;
 				while (!exit) {
-					char swValue = Keyin.inChar(" Modificar? (s/n): ");
+					char swValue = Keyin.inChar("Modificar? (s/n): ");
 
 					switch (swValue) {
 					case 'n':
@@ -103,16 +127,24 @@ public class MenuShipUpdate implements Renderer {
 					case 'S':
 						try {
 							exit = true;
-							long idGenerated = client.update(ship);
+							long idGenerated = client.update(ship, arrivalDate);
 
 							System.out
 									.println("Barco Modificado correctamente, id: "
 											+ idGenerated);
 
-						} catch (Exception e) {
-							e.printStackTrace();
-							log.error("Problema al contactar al server", e);
-							System.out.println("Error: Al contactar al servidor");
+						}
+						catch(CustomNotArrivedThatDateServiceException e){
+							log.error("No se puede modificar el barco para dicha fecha", e);
+							System.out.println(e.getMessage());
+						}catch(CustomServiceException e){
+							log.error("Excepcion remota", e);
+							System.out.println("Error: Remoto: "+e.getMessage());
+						}
+						catch (Exception e) {
+							//e.printStackTrace();
+							log.error("Error inesperado", e);
+							System.out.println("Error: inesperado: "+e.getMessage());
 						}
 
 						break;
