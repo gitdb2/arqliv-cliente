@@ -3,7 +3,11 @@ package uy.edu.ort.arqliv.obligatorio.client.menus.profiling;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 
-public class MenuProfiling implements Renderer{
+public class MenuProfiling implements Renderer {
+	
+	public MenuProfiling() {
+		super();
+	}
 
 	@Override
 	public void render() {
@@ -34,33 +38,33 @@ public class MenuProfiling implements Renderer{
 				break;
 			case 1:
 				System.out.println("abriendo menu Promedio...");
-				new MenuProfilingPromedio().render();
+				new MenuProfilingAvg(true).render();
 				break;
 			case 2:
 				System.out.println("abriendo menu Minimo...");
-				new MenuProfilingMinimo().render();
+				new MenuProfilingMin(true).render();
 				break;
 			case 3:
 				System.out.println("abriendo menu Maximo...");
-				new MenuProfilingMaximo().render();
+				new MenuProfilingMax(true).render();
 				break;
 			case 4:
-				//TODO
 				System.out.println("Generando PDF Promedio...");
+				new MenuProfilingAvg(false).render();
 				break;
 			case 5:
-				//TODO
 				System.out.println("Generando PDF Minimo...");
+				new MenuProfilingMin(false).render();
 				break;
 			case 6:
-				//TODO
 				System.out.println("Generando PDF Maximo...");
+				new MenuProfilingMax(false).render();
 				break;
 			default:
 				System.out.println("Valor invalido");
-				break; // This break is not really necessary
+				break;
 			}
 		}
 	}
-
+	
 }

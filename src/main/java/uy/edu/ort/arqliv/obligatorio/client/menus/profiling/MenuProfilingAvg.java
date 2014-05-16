@@ -1,5 +1,6 @@
 package uy.edu.ort.arqliv.obligatorio.client.menus.profiling;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,31 +12,47 @@ import uy.edu.ort.arqliv.obligatorio.client.services.clients.ProfilingServiceCli
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.dominio.Pair;
 
-public class MenuProfilingPromedio {
+public class MenuProfilingAvg  {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+	private boolean toSysOut;
 	
+	public MenuProfilingAvg(boolean toSysOut) {
+		this.toSysOut = toSysOut;
+	}
+
 	public void render() {
 		try {
-			
 			ProfilingServiceClient client = (ProfilingServiceClient) ContextSingleton
 					.getInstance().getBean(RemoteClientesConstants.ProfilingClient);
 			
 			List<Pair<String, Double>> averages = client.avgServiceTime(new Date());
 			
-			System.out.println("========================");
+			String titles = String.format("%-40s %-20s", "Servicio", "Tiempo promedio");
 			
-			for (Pair<String, Double> pair : averages) {
-				System.out.println(pair.toString());
-			}
-			
-			System.out.println("========================");
+			List<String> lines = new ArrayList<>();
 
+			for (Pair<String, Double> pair : averages) {
+				lines.add(String.format("%-40s %-20.2f", pair.getKey(), pair.getValue()));
+			}
+			printData(titles, lines);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Problema al contactar al server", e);
 			System.out.println("Error: Al contactar al servidor");
 		}
 	}
-
+	
+	private void printData(String titles, List<String> lines) {
+		if (toSysOut) {
+			UtilsMenuProfiling.printToSysOut(titles, lines);
+		} else {
+			UtilsMenuProfiling.printToPdf(titles, 
+					lines, 
+					"C:/ORT/pdfs/profiling_avg_" + System.currentTimeMillis() + ".pdf", 
+					"Promedio de tiempo de servicios");
+		}
+	}
+	
 }
