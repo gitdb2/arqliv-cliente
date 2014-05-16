@@ -1,9 +1,9 @@
-package uy.edu.ort.arqliv.obligatorio.client.menus.ship;
+package uy.edu.ort.arqliv.obligatorio.client.menus.container;
 
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 
-public class MenuShip implements Renderer{
+public class MenuContainer implements Renderer{
 
 	@Override
 	public void render() {
@@ -13,7 +13,7 @@ public class MenuShip implements Renderer{
 		while (!exit) {
 
 			System.out.println("============================");
-			System.out.println("|      MENU  BARCOS        |");
+			System.out.println("|     MENU CONTENEDORES    |");
 			System.out.println("============================");
 			System.out.println("| Optiones:                |");
 			System.out.println("|        1. Alta           |");
@@ -33,29 +33,29 @@ public class MenuShip implements Renderer{
 				break;
 			case 1:
 				System.out.println("abriendo menu Alta...");
-				new MenuShipCreate().render();
+				new MenuContainerCreate().render();
 
 				break;
 			case 2:
 				System.out.println("abriendo menu Baja...");
-				new MenuShipDelete().render();
+				new MenuContainerDelete().render();
 				
 				break;
 			case 3:
 				System.out.println("abriendo menu Modificar...");
-				new MenuShipUpdate().render();
+				new MenuContainerUpdate().render();
 				
 			
 				break;
 			case 4:
 				System.out
 				.println("Listando...");
-				new MenuShipList(true).render();
+				new MenuContainerList(true).render();
 				break;
 			case 5:
 				System.out
 				.println("Generando PDF...");
-				new MenuShipList(false).render();
+				new MenuContainerList(false).render();
 				break;
 
 			

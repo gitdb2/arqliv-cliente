@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
+import uy.edu.ort.arqliv.obligatorio.client.menus.container.MenuContainer;
 import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
@@ -43,7 +44,7 @@ public class MenuMainScreen implements Renderer {
 			System.out.println("============================");
 			System.out.println("| Optiones:                |");
 			System.out.println("|        1. Barcos         |");
-			System.out.println("|        2. Containers     |");
+			System.out.println("|        2. Contenedores   |");
 			System.out.println("|        3. Arribos        |");
 			System.out.println("|        4. Reportes       |");
 			System.out.println("|        0. Salir          |");
@@ -62,8 +63,9 @@ public class MenuMainScreen implements Renderer {
 
 				break;
 			case 2:
-				System.out
-				.println("Error: Containers No implememtado aún");
+				System.out.println("abriendo menu Ship...");
+				new MenuContainer().render();
+
 				break;
 			case 3:
 				System.out

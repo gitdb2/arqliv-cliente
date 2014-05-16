@@ -33,12 +33,7 @@ public class MenuShipUpdate implements Renderer {
 		ShipServiceClient client = (ShipServiceClient) ContextSingleton
 				.getInstance().getBean(RemoteClientesConstants.ShipClient);
 
-		int id = Keyin.inInt("ID jpa del barco (-1 para salir): ");
-
-		if (id < 1) {
-			System.out.println("volviendo...");
-			return;
-		}
+		System.out.println("============= Update barco ==================");
 
 		String fechaArrival = "";
 		boolean fechaOk = false;
@@ -60,7 +55,28 @@ public class MenuShipUpdate implements Renderer {
 		}
 
 		try {
-			Ship ship = client.find(id);
+			
+			Ship ship = null;
+			int id = -1;
+			boolean continueTo = false;
+			do{
+				id = Keyin.inInt("ID jpa del Barco (-1 o 0 para salir): ");
+
+				if (id < 1) {
+					System.out.println("volviendo...");
+					return;
+				}
+				ship = client.find(id);
+				
+				if(ship ==null){
+					System.out.println("Error: No se encuentra el barco id:"+id);
+				}else{
+					continueTo = true;
+				}
+			}while(!continueTo);
+			
+			
+		
 			System.out.println("==================================");
 			System.out.println("========= Modificar id: " + id);
 			System.out.println("========= fecha arrivo: " +sdfOut.format(arrivalDate) );
