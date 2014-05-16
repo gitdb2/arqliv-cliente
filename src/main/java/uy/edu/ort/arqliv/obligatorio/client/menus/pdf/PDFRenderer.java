@@ -75,9 +75,12 @@ public class PDFRenderer {
 					this.outputfile));
 			document.open();
 
+			document.add(new Paragraph(pageHeader));
+
 			document.add(new LineSeparator(0.3f, 100, null, 0, -3));
 			document.add(Chunk.NEWLINE);
-				
+			document.add(Chunk.NEWLINE);
+	
 			
 			document.add(dataHeader);
 			document.add(Chunk.NEWLINE);
@@ -85,10 +88,11 @@ public class PDFRenderer {
 				document.add(new Phrase(line, font));
 				document.add(Chunk.NEWLINE);
 			}
-		
-			document.add(new LineSeparator(0.5f, 100, null, 0, -3));
 			document.add(Chunk.NEWLINE);
-			document.add(footer);
+			document.add(Chunk.NEWLINE);
+
+			document.add(new LineSeparator(0.5f, 100, null, 0, -3));
+			document.add(new Paragraph(footer));
 			document.add(Chunk.NEWLINE);
 			document.close();
 		} catch (FileNotFoundException e) {

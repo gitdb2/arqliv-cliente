@@ -1,4 +1,4 @@
-package uy.edu.ort.arqliv.obligatorio.client.menus.ship;
+package uy.edu.ort.arqliv.obligatorio.client.menus.container;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,40 +6,43 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.ContainerServiceClient;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomInUseServiceException;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Container;
-import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
-
-public class MenuShipDelete implements Renderer {
+/**
+ * 
+ * @author rodrigo
+ *
+ */
+public class MenuContainerDelete implements Renderer {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public void render() {
 
-		ShipServiceClient client = (ShipServiceClient) ContextSingleton
-				.getInstance().getBean(RemoteClientesConstants.ShipClient);
+		ContainerServiceClient client = (ContainerServiceClient) ContextSingleton
+				.getInstance().getBean(RemoteClientesConstants.ContainerClient);
 
-		System.out.println("============= baja Barco ==================");
+		System.out.println("============= BAJA Contenerdor ==================");
 
 		try {
 			
-			Ship ship = null;
+			Container container = null;
 			int id = -1;
 			boolean continueTo = false;
 			do{
-				id = Keyin.inInt("ID jpa del Barco (-1 o 0 para salir): ");
+				id = Keyin.inInt("ID jpa del Contenedor (-1 o 0 para salir): ");
 
 				if (id < 1) {
 					System.out.println("volviendo...");
 					return;
 				}
-				ship = client.find(id);
+				container = client.find(id);
 				
-				if(ship ==null){
-					System.out.println("Error: No se encuentra el Barco id:"+id);
+				if(container ==null){
+					System.out.println("Error: No se encuentra el contenedor id:"+id);
 				}else{
 					continueTo = true;
 				}
@@ -48,7 +51,7 @@ public class MenuShipDelete implements Renderer {
 			
 			System.out.println("===============================");
 			System.out.println("========= Eliminar id: " + id);
-			System.out.println(ship.toStringConsola());
+			System.out.println(container.toStringConsola());
 			System.out.println("================================");
 
 			boolean exit = false;
@@ -69,12 +72,12 @@ public class MenuShipDelete implements Renderer {
 						client.delete(id);
 
 						System.out
-								.println("Barco Eliminado correctamente, id: " + id);
+								.println("Contenedor Eliminado correctamente, id: " + id);
 
 					} 
 					catch(CustomInUseServiceException inUseEx){
-						log.error("No se puede eliminar el barco porque esta en uso", inUseEx);
-						System.out.println("Error: No se puede eliminar el barco porque esta en uso.");
+						log.error("No se puede eliminar el Contenedor porque esta en uso", inUseEx);
+						System.out.println("Error: No se puede eliminar el Contenedor porque esta en uso.");
 					}
 					catch (Exception e) {
 						e.printStackTrace();

@@ -1,5 +1,6 @@
 package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 
+import java.util.Date;
 import java.util.List;
 
 import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
@@ -43,11 +44,12 @@ public class ShipServiceClient {
 	/**
 	 * TODO
 	 * @param ship
+	 * @param arrivalDate
 	 * @return
 	 * @throws CustomServiceException
 	 */
-	public Long update(Ship ship) throws CustomServiceException {
-		return shipService.store(MainSingleton.getInstance().getUser(), ship);
+	public Long update(Ship ship, Date arrivalDate) throws CustomServiceException {
+		return shipService.update(MainSingleton.getInstance().getUser(), ship, arrivalDate);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package uy.edu.ort.arqliv.obligatorio.client.menus.ship;
+package uy.edu.ort.arqliv.obligatorio.client.menus.container;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +10,17 @@ import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.menus.pdf.PDFRenderer;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.ContainerServiceClient;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
-import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
+import uy.edu.ort.arqliv.obligatorio.dominio.Container;
 
-public class MenuShipList implements Renderer {
+public class MenuContainerList implements Renderer {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	boolean toSysOut = true;
 
-	public MenuShipList(boolean toSysOut) {
+	public MenuContainerList(boolean toSysOut) {
 		this.toSysOut = toSysOut;
 	}
 
@@ -30,40 +30,35 @@ public class MenuShipList implements Renderer {
 		boolean exit = false;
 
 		try {
-			ShipServiceClient client = (ShipServiceClient) ContextSingleton
-					.getInstance().getBean(RemoteClientesConstants.ShipClient);
+			ContainerServiceClient client = (ContainerServiceClient) ContextSingleton
+					.getInstance().getBean(RemoteClientesConstants.ContainerClient);
 
-			List<Ship> ships = client.list();
+
+			List<Container> containers = client.list();
 
 			String titles = String.format
 
 					 ("%10s  " // ID
-					+ "%-30s " // "Nombre",
-					+ "%-15s " // "Bandera",
-					+ "%15s " // "Codigo",
-					+ "%20s " // "Año Manufactura",
-					+ "%20s " // "Cant. Tripulacion",
+					+ "%15s  " // "Codigo",
+					+ "%-30s " // "Marca",
+					+ "%-30s " // "Modelo",
 					+ "%15s" // "Capacidad"
-			, "Id", "Nombre", "Bandera", "Codigo", "Año Manufactura",
-					"Cant. Tripulacion", "Capacidad");
+			, "Id", "Codigo", "Marca", "Modelo", "Capacidad");
 
 			List<String> lines = new ArrayList<>();
-			for (int i = 0; i < ships.size(); i++) {
+			for (int i = 0; i < containers.size(); i++) {
 
-				Ship ship = ships.get(i);
+				Container container = containers.get(i);
 				lines.add(String.format
 
 						 ("%10d  " // ID
-						+ "%-30s " // "Nombre",
-						+ "%-15s " // "Bandera",
-						+ "%15d " // "Codigo",
-						+ "%20d " // "Año Manufactura",
-						+ "%20d " // "Cant. Tripulacion",
+						+ "%15d  " // "Codigo",
+						+ "%-30s " // "Marca",
+						+ "%-30s " // "Modelo",
 						+ "%15.2f" // "Capacidad"
 				,
-				ship.getId(), ship.getName(), ship.getFlag(), ship.getCode(),
-						ship.getManufactoringYear(), ship.getCrewQuantity(),
-						ship.getCapacity())
+				container.getId(), container.getCode(), container.getBrand(), container.getModel(), 
+						container.getCapacity())
 						);
 			}
 
@@ -75,9 +70,9 @@ public class MenuShipList implements Renderer {
 				System.out.println("-------------o-------------");
 			}else{
 				try {
-					String file = "C:/ORT/pdfs/ships_"+ System.currentTimeMillis() + ".pdf";
+					String file = "C:/ORT/pdfs/containers_"+ System.currentTimeMillis() + ".pdf";
 					PDFRenderer renderer = new PDFRenderer(file,
-							"Listado de Barcos", titles, lines, "");
+							"Listado de Contenedores", titles, lines, "");
 					renderer.render();
 					System.out.println("Archivo generado en "+file);
 				} catch (Exception e) {

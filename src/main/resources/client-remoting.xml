@@ -37,4 +37,15 @@
 	</bean>
 <!-- Servicio para profiling END-->
 
+<!-- Servicio para container INI-->
+	<bean id="containerClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ContainerServiceClient">
+		<property name="containerService" ref="containerService" />
+	</bean>
+
+	<bean id="containerService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ContainerService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ContainerService" />
+	</bean>
+<!-- Servicio para container END-->
+
 </beans>
