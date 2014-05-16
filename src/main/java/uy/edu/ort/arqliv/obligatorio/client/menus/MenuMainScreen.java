@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
+import uy.edu.ort.arqliv.obligatorio.client.menus.profiling.MenuProfiling;
 import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
@@ -46,6 +47,7 @@ public class MenuMainScreen implements Renderer {
 			System.out.println("|        2. Containers     |");
 			System.out.println("|        3. Arribos        |");
 			System.out.println("|        4. Reportes       |");
+			System.out.println("|        5. Profiling      |");
 			System.out.println("|        0. Salir          |");
 			System.out.println("============================");
 
@@ -59,23 +61,20 @@ public class MenuMainScreen implements Renderer {
 			case 1:
 				System.out.println("abriendo menu Ship...");
 				new MenuShip().render();
-
 				break;
 			case 2:
-				System.out
-				.println("Error: Containers No implememtado aún");
+				System.out.println("Error: Containers No implememtado aún");
 				break;
 			case 3:
-				System.out
-				.println("Error: Arribos No implememtado aún");
+				System.out.println("Error: Arribos No implememtado aún");
 				break;
 			case 4:
-				System.out
-				.println("Error: Reportes No implememtado aún");
+				System.out.println("Error: Reportes No implememtado aún");
 				break;
-
-
-			
+			case 5:
+				System.out.println("abriendo menu Profiling...");
+				new MenuProfiling().render();
+				break;
 			default:
 				System.out.println("Invalid selection");
 				break; // This break is not really necessary
