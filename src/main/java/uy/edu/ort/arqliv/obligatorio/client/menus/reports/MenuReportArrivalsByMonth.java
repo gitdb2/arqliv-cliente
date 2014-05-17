@@ -40,9 +40,9 @@ public class MenuReportArrivalsByMonth {
 			String titles = String.format("%10s  " // ID
 					+ "%-15s  " // "Fecha de arribo",
 					+ "%15s  " // "Id de barco",
-					+ "%-30s  " // "Pais de Origen",
-					+ "%-30s  " // "Ids contenedores"
-					+ "%-30s " // "Desc. Contenedores"
+					+ "%-15s  " // "Pais de Origen",
+					+ "%-20s  " // "Ids contenedores"
+					+ "%-20s " // "Desc. Contenedores"
 					, "Id", "Fecha de arribo", "Id de barco"
 					, "Pais de Origen",	"Ids contenedores", "Desc. Contenedores");
 			
@@ -55,9 +55,9 @@ public class MenuReportArrivalsByMonth {
 					lines.add(String.format("%10d  " // ID
 							+ "%-15s  " // "Fecha de arribo",
 							+ "%15d  " // "Id de barco",
-							+ "%-30s  " // "Pais de Origen",
-							+ "%-30s  " // "Ids contenedores"
-							+ "%-30s" // "Desc. Contenedores"
+							+ "%-15s  " // "Pais de Origen",
+							+ "%-20s  " // "Ids contenedores"
+							+ "%-20s" // "Desc. Contenedores"
 							, arr.getId()
 							, sdfOut.format(arr.getArrivalDate())
 							, arr.getShip().getId()

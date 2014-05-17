@@ -70,7 +70,7 @@ public class MenuArrivalCreate implements Renderer {
 	
 		
 		
-		String containersDescriptions 	= Keyin.inString("Descipcion de Contenedores (texto): ");
+		String containersDescriptions 	= Keyin.inString("Descripcion de Contenedores (texto): ");
 		List<Long> containers 		= new ArrayList<>();
 		System.out.println("Agregar contenedores:");
 		boolean noMore = false;

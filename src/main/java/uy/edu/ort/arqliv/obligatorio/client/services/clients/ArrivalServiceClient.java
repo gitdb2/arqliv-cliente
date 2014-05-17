@@ -6,7 +6,6 @@ import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
 import uy.edu.ort.arqliv.obligatorio.common.ArrivalService;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Arrival;
-import uy.edu.ort.arqliv.obligatorio.dominio.Container;
 
 /**
  * 
