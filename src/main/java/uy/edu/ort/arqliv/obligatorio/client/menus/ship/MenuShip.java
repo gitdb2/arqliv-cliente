@@ -34,18 +34,14 @@ public class MenuShip implements Renderer{
 			case 1:
 				System.out.println("abriendo menu Alta...");
 				new MenuShipCreate().render();
-
 				break;
 			case 2:
 				System.out.println("abriendo menu Baja...");
 				new MenuShipDelete().render();
-				
 				break;
 			case 3:
 				System.out.println("abriendo menu Modificar...");
 				new MenuShipUpdate().render();
-				
-			
 				break;
 			case 4:
 				System.out
@@ -57,8 +53,6 @@ public class MenuShip implements Renderer{
 				.println("Generando PDF...");
 				new MenuShipList(false).render();
 				break;
-
-			
 			default:
 				System.out.println("Valor invalido");
 				break; // This break is not really necessary
