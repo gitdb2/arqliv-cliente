@@ -29,11 +29,35 @@ public class DemoConsole4 {
 
 		new DemoConsole4().run();
 	}
-
+	
+	
 	private void run() throws ParseException, CustomServiceException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		ArrivalServiceClient client = (ArrivalServiceClient) ContextSingleton
 				.getInstance().getBean(RemoteClientsConstants.ArrivalClient);
+		
+		
+		Arrival arr = client.find(9L);
+		List<Long> ids = Arrays.asList(1L,6L);//generateContainerList(arr.getContainers());
+
+		try {
+			client.update(arr, arr.getShip().getId(), ids);
+			arr = client.find(9L);
+			System.out.println(arr.toString());
+			
+		} catch (Exception e) {
+			System.out.println("ERROR: " + e.getMessage());
+		}
+		
+		
+		
+	}
+
+	private void oink() throws ParseException, CustomServiceException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		ArrivalServiceClient client = (ArrivalServiceClient) ContextSingleton
+				.getInstance().getBean(RemoteClientsConstants.ArrivalClient);
+		
 
 		{
 			System.out.println("test1 OK");
