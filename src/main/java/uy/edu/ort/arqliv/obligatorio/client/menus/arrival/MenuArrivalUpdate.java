@@ -92,7 +92,7 @@ public class MenuArrivalUpdate implements Renderer {
 			Integer ship = 0;
 			do{
 				ship = Keyin.inIntAllowEmpty("ID barco ("+arrival.getShip().getId()+"): ");
-				if(ship > 0 || ship ==null){
+				if( ship == null || ship > 0){
 					forceShipId = false;
 				}else{
 					System.out.println("Error el id de barco debe ser > 0. Intente de nuevo");
@@ -197,9 +197,12 @@ public class MenuArrivalUpdate implements Renderer {
 				}
 			}
 		} catch (CustomServiceException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			log.error("Problema al contactar al server", e);
 			System.out.println("Error: Al contactar al servidor");
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			System.out.println("Error: "+e.getMessage());	
 		}
 		Keyin.inChar("presione enter tecla para continuar...");
 	}
