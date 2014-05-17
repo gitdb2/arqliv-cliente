@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomNotArrivedThatDateServiceException;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
@@ -172,9 +172,9 @@ public class MenuShipUpdate implements Renderer {
 				}
 			}
 		} catch (CustomServiceException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			log.error("Problema al contactar al server", e);
-			System.out.println("Error: Al contactar al servidor");
+			System.out.println("Error: Al contactar al servidor: "+e.getMessage());
 		}
 		Keyin.inChar("presione enter tecla para continuar...");
 	}

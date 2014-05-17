@@ -13,10 +13,11 @@ import org.slf4j.LoggerFactory;
 
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
+import uy.edu.ort.arqliv.obligatorio.client.menus.arrival.MenuArrival;
 import uy.edu.ort.arqliv.obligatorio.client.menus.container.MenuContainer;
 import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
 
 /**
  * 
@@ -58,18 +59,19 @@ public class MenuMainScreen implements Renderer {
 				exit = true;
 				break;
 			case 1:
-				System.out.println("abriendo menu Ship...");
+				System.out.println("abriendo menu Barcos...");
 				new MenuShip().render();
 
 				break;
 			case 2:
-				System.out.println("abriendo menu Ship...");
+				System.out.println("abriendo menu Contenedores...");
 				new MenuContainer().render();
 
 				break;
 			case 3:
-				System.out
-				.println("Error: Arribos No implememtado aún");
+				System.out.println("abriendo menu Arribos...");
+				new MenuArrival().render();
+			
 				break;
 			case 4:
 				System.out

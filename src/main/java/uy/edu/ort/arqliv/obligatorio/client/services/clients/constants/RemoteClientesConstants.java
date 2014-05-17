@@ -1,4 +1,4 @@
-package uy.edu.ort.arqliv.obligatorio.client.services.clients;
+package uy.edu.ort.arqliv.obligatorio.client.services.clients.constants;
 
 public interface RemoteClientesConstants {
 	public String ShipClient = "shipClient";
