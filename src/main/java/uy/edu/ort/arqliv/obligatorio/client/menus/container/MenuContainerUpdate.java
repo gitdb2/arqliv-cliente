@@ -12,7 +12,7 @@ import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ContainerServiceClient;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomNotArrivedThatDateServiceException;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Container;
@@ -30,7 +30,7 @@ public class MenuContainerUpdate implements Renderer {
 	public void render() {
 
 		ContainerServiceClient client = (ContainerServiceClient) ContextSingleton
-				.getInstance().getBean(RemoteClientesConstants.ContainerClient);
+				.getInstance().getBean(RemoteClientsConstants.ContainerClient);
 
 		System.out.println("============= Update Contenerdor ==================");
 

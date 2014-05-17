@@ -16,9 +16,10 @@ import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.profiling.MenuProfiling;
 import uy.edu.ort.arqliv.obligatorio.client.menus.arrival.MenuArrival;
 import uy.edu.ort.arqliv.obligatorio.client.menus.container.MenuContainer;
+import uy.edu.ort.arqliv.obligatorio.client.menus.reports.MenuReports;
 import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 
 /**
  * 
@@ -71,10 +72,10 @@ public class MenuMainScreen implements Renderer {
 			case 3:
 				System.out.println("abriendo menu Arribos...");
 				new MenuArrival().render();
-			
 				break;
 			case 4:
-				System.out.println("Error: Reportes No implememtado aún");
+				System.out.println("abriendo menu Reportes...");
+				new MenuReports().render();
 				break;
 			case 5:
 				System.out.println("abriendo menu Profiling...");

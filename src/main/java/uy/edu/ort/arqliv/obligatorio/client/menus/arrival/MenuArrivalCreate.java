@@ -13,7 +13,7 @@ import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ArrivalServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Arrival;
 
@@ -111,7 +111,7 @@ public class MenuArrivalCreate implements Renderer {
 				try {
 
 					ArrivalServiceClient client = (ArrivalServiceClient) ContextSingleton
-							.getInstance().getBean(RemoteClientesConstants.ArrivalClient);
+							.getInstance().getBean(RemoteClientsConstants.ArrivalClient);
 
 					Long idGenerated = client.create(arrival, ship, containers);
 					System.out.println("Arribo creado correctamente con id: "+ idGenerated);

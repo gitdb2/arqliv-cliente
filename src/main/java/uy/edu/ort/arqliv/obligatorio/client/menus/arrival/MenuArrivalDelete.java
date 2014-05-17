@@ -11,7 +11,7 @@ import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ArrivalServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Arrival;
 import uy.edu.ort.arqliv.obligatorio.dominio.Container;
@@ -28,7 +28,7 @@ public class MenuArrivalDelete implements Renderer {
 	public void render() {
 
 		ArrivalServiceClient client = (ArrivalServiceClient) ContextSingleton
-				.getInstance().getBean(RemoteClientesConstants.ArrivalClient);
+				.getInstance().getBean(RemoteClientsConstants.ArrivalClient);
 
 		System.out.println("============= BAJA Arribo ==================");
 

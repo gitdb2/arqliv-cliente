@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ArrivalServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Arrival;
 
@@ -30,7 +30,7 @@ public class DemoConsole2 {
 	private void run() throws ParseException, CustomServiceException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		ArrivalServiceClient client = (ArrivalServiceClient) ContextSingleton
-				.getInstance().getBean(RemoteClientesConstants.ArrivalClient);
+				.getInstance().getBean(RemoteClientsConstants.ArrivalClient);
 		{
 			Arrival arrival = new Arrival();
 			arrival.setArrivalDate(sdf.parse("20120105"));

@@ -11,7 +11,7 @@ import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.menus.pdf.PDFRenderer;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
 
@@ -31,7 +31,7 @@ public class MenuShipList implements Renderer {
 
 		try {
 			ShipServiceClient client = (ShipServiceClient) ContextSingleton
-					.getInstance().getBean(RemoteClientesConstants.ShipClient);
+					.getInstance().getBean(RemoteClientsConstants.ShipClient);
 
 			List<Ship> ships = client.list();
 

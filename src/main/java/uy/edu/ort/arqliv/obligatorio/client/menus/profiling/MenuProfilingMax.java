@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ProfilingServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.dominio.Pair;
 
 public class MenuProfilingMax {
@@ -31,7 +31,7 @@ private final Logger log = LoggerFactory.getLogger(this.getClass());
 			Date forDate = UtilsMenuProfiling.parseDate(forDateString);
 			
 			ProfilingServiceClient client = (ProfilingServiceClient) ContextSingleton
-					.getInstance().getBean(RemoteClientesConstants.ProfilingClient);
+					.getInstance().getBean(RemoteClientsConstants.ProfilingClient);
 			
 			List<Pair<String, Long>> maxs = client.maxServiceTime(forDate);
 			

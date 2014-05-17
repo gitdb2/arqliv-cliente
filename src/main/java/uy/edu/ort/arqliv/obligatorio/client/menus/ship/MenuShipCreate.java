@@ -7,7 +7,7 @@ import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
 
 public class MenuShipCreate implements Renderer {
@@ -50,7 +50,7 @@ public class MenuShipCreate implements Renderer {
 
 					ShipServiceClient client = (ShipServiceClient) ContextSingleton
 							.getInstance().getBean(
-									RemoteClientesConstants.ShipClient);
+									RemoteClientsConstants.ShipClient);
 
 					Long idGenerated = client.create(ship);
 					System.out.println("Barco creado correctamente con id: "

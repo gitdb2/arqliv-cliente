@@ -9,9 +9,8 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.profiling.UtilsMenuProfiling;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.ProfilingServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ReportsServiceClient;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 import uy.edu.ort.arqliv.obligatorio.dominio.Arrival;
 
 public class MenuReportArrivalsByMonth {
@@ -31,7 +30,7 @@ public class MenuReportArrivalsByMonth {
 			int month = UtilsMenuReports.parseMonth(monthString);
 			
 			ReportsServiceClient client = (ReportsServiceClient) ContextSingleton
-					.getInstance().getBean(RemoteClientesConstants.ReportsClient);
+					.getInstance().getBean(RemoteClientsConstants.ReportsClient);
 			
 			List<Arrival> arrivals = client.arrivalsByMonth(month);
 			
