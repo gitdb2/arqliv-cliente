@@ -34,42 +34,37 @@ public class MenuArrivalList implements Renderer {
 
 		try {
 			ArrivalServiceClient client = (ArrivalServiceClient) ContextSingleton
-					.getInstance().getBean(RemoteClientesConstants.ArrivalClient);
-
+					.getInstance().getBean(
+							RemoteClientesConstants.ArrivalClient);
 
 			List<Arrival> arrivals = client.list();
 
 			String titles = String.format
 
-					 ("%10s  " // ID
+			("%10s  " // ID
 					+ "%-15s  " // "Fecha de arribo",
 					+ "%15s  " // "Id de barco",
 					+ "%-30s  " // "Pais de Origen",
 					+ "%-30s  " // "Ids contenedores"
 					+ "%-30s " // "Desc. Contenedores"
-			, "Id", "Fecha de arribo", "Id de barco", "Pais de Origen", "Ids contenedores", "Desc. Contenedores");
-			
+			, "Id", "Fecha de arribo", "Id de barco", "Pais de Origen",
+					"Ids contenedores", "Desc. Contenedores");
+
 			List<String> lines = new ArrayList<>();
 			for (int i = 0; i < arrivals.size(); i++) {
 
 				Arrival arrival = arrivals.get(i);
-				lines.add(
-					String.format(
-						  "%10d  " // ID                   
-						+ "%-15s  " // "Fecha de arribo",    
-						+ "%15d  " // "Id de barco",        
-						+ "%-30s  " // "Pais de Origen",    
-						+ "%-30s  " // "Ids contenedores"    
-						+ "%-30s" // "Desc. Contenedores"  
-						,
-						arrival.getId(), 
-						sdfOut.format(arrival.getArrivalDate()), 
-						arrival.getShip().getId(), 
-						arrival.getShipOrigin(),
-						generateContainerList(arrival.getContainers()).toString(),
-						arrival.getContainersDescriptions()
-					)
-				);
+				lines.add(String.format("%10d  " // ID
+						+ "%-15s  " // "Fecha de arribo",
+						+ "%15d  " // "Id de barco",
+						+ "%-30s  " // "Pais de Origen",
+						+ "%-30s  " // "Ids contenedores"
+						+ "%-30s" // "Desc. Contenedores"
+				, arrival.getId(), sdfOut.format(arrival.getArrivalDate()),
+						arrival.getShip().getId(), arrival.getShipOrigin(),
+						generateContainerList(arrival.getContainers())
+								.toString(), arrival
+								.getContainersDescriptions()));
 			}
 
 			if (toSysOut) {
@@ -78,22 +73,21 @@ public class MenuArrivalList implements Renderer {
 					System.out.println(line);
 				}
 				System.out.println("-------------o-------------");
-			}else{
+			} else {
 				try {
-					String file = "C:/ORT/pdfs/arrivals_"+ System.currentTimeMillis() + ".pdf";
+					String file = "C:/ORT/pdfs/arrivals_"
+							+ System.currentTimeMillis() + ".pdf";
 					PDFRenderer renderer = new PDFRenderer(file,
 							"Listado de Arribos", titles, lines, "");
 					renderer.render();
-					System.out.println("Archivo generado en "+file);
+					System.out.println("Archivo generado en " + file);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					log.error("no se pudo generar el pdf");
-					System.out.println("Error: No se pudo generar el pdf: "+e.getMessage());
+					System.out.println("Error: No se pudo generar el pdf: "
+							+ e.getMessage());
 				}
-				
-			}
 
-			
+			}
 
 		} catch (CustomServiceException e) {
 			// TODO Auto-generated catch block
@@ -107,8 +101,10 @@ public class MenuArrivalList implements Renderer {
 
 	private List<Long> generateContainerList(List<Container> containers) {
 		List<Long> ret = new ArrayList<>();
-		for (Container container : containers) {
-			ret.add(container.getId());
+		if (containers != null) {
+			for (Container container : containers) {
+				ret.add(container.getId());
+			}
 		}
 		return ret;
 	}
