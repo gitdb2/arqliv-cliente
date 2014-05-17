@@ -133,7 +133,7 @@ public class MenuArrivalUpdate implements Renderer {
 			boolean hayCambios = false;
 
 			if (arrivalDate != null) {
-				if (sdf.format(arrival.getArrivalDate()).equals(fechaArrival)) {
+				if (!sdf.format(arrival.getArrivalDate()).equals(fechaArrival)) {
 					arrival.setArrivalDate(arrivalDate);
 					hayCambios = true;
 				}
