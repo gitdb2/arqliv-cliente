@@ -59,4 +59,15 @@
 	</bean>
 <!-- Servicio para reportes END-->
 
+<!-- Servicio para arrival INI-->
+	<bean id="arrivalClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ArrivalServiceClient">
+		<property name="arrivalService" ref="arrivalService" />
+	</bean>
+
+	<bean id="arrivalService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ArrivalService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ArrivalService" />
+	</bean>
+<!-- Servicio para arrival END-->
+
 </beans>

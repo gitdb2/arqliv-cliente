@@ -7,7 +7,7 @@ import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.Renderer;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ContainerServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomInUseServiceException;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Container;

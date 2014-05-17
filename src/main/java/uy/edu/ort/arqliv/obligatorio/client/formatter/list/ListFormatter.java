@@ -3,6 +3,8 @@ package uy.edu.ort.arqliv.obligatorio.client.formatter.list;
 import java.util.ArrayList;
 import java.util.List;
 
+import uy.edu.ort.arqliv.obligatorio.common.utils.Duple;
+
 public class ListFormatter {
 	
 	

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import uy.edu.ort.arqliv.obligatorio.client.menus.arrival.MenuArrivalList;
 import uy.edu.ort.arqliv.obligatorio.client.menus.pdf.PDFRenderer;
 
 import com.itextpdf.text.Document;
@@ -29,6 +30,15 @@ public class DemoConsole1 {
 	public static void main(String[] args) throws IOException,
 			DocumentException {
 
+		testListadoArrival();
+
+	}
+	private static void testListadoArrival(){
+		new MenuArrivalList(true).render();
+	}
+	
+	
+	private static void testListadoship() {
 		List<String> lines = Arrays.asList(String.format("%10s " // ID
 				+ "%-30s " + "%-15s " + "%15s " + "%20s " + "%20s " + "%15s",
 				"Id", "Nombre", "Bandera", "Codigo", "Año Manufactura",
@@ -54,9 +64,6 @@ public class DemoConsole1 {
 				"aaaaaaa aaaaaa aaaaaaaa", lines, "FOOTER");
 		render.render();
 		System.out.println("Fin");
-
-		// createPdf("E:/ORT/arch_"
-		// + System.currentTimeMillis() + ".pdf");
 	}
 
 	public static String TEXT = "1234567890 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ";

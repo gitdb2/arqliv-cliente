@@ -14,10 +14,11 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.profiling.MenuProfiling;
+import uy.edu.ort.arqliv.obligatorio.client.menus.arrival.MenuArrival;
 import uy.edu.ort.arqliv.obligatorio.client.menus.container.MenuContainer;
 import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
 
 /**
  * 
@@ -60,15 +61,17 @@ public class MenuMainScreen implements Renderer {
 				exit = true;
 				break;
 			case 1:
-				System.out.println("abriendo menu Ship...");
+				System.out.println("abriendo menu Barcos...");
 				new MenuShip().render();
 				break;
 			case 2:
-				System.out.println("abriendo menu Containers...");
+				System.out.println("abriendo menu Contenedores...");
 				new MenuContainer().render();
 				break;
 			case 3:
-				System.out.println("Error: Arribos No implememtado aún");
+				System.out.println("abriendo menu Arribos...");
+				new MenuArrival().render();
+			
 				break;
 			case 4:
 				System.out.println("Error: Reportes No implememtado aún");
@@ -84,44 +87,5 @@ public class MenuMainScreen implements Renderer {
 		}
 	}
 
-	public void renderss() {
-
-		// System.out.print("\u001b[2J");
-		// Display menu graphics
-		System.out.println("============================");
-		System.out.println("|       Identificacion     |");
-		System.out.println("============================");
-		// System.out.println("| Optiones:                |");
-		// System.out.println("|        1. Login          |");
-		// System.out.println("|        2. Salir          |");
-		// System.out.println("============================");
-		// swValue = Keyin.inInt(" Select option: ");
-
-		// String usuario = Keyin.inString(" Usuario: ");
-		// String password = Keyin.inString(" Password: ");
-
-		// if ("1".equals(usuario) && "1".equals(password)) {
-		//
-		// System.out.println("Llendo al menu Principal");
-		// } else {
-		// System.out.println("Error: usuario o contrasena incorrecta");
-		// }
-
-		try {
-
-			ShipServiceClient client = (ShipServiceClient) ContextSingleton
-					.getInstance().getBean(RemoteClientesConstants.ShipClient);
-
-			client.create(null);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("Problema al contactar al server", e);
-			System.out.println("Error: Al contactar al servidor");
-		}
-
-		Keyin.inChar("presione enter tecla para continuar...");
-
-	}
 
 }
