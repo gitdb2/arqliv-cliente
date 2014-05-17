@@ -48,4 +48,15 @@
 	</bean>
 <!-- Servicio para container END-->
 
+<!-- Servicio para reportes INI-->
+	<bean id="reportsClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ReportsServiceClient">
+		<property name="reportsService" ref="reportsService" />
+	</bean>
+
+	<bean id="reportsService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ReportsService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ReportsService" />
+	</bean>
+<!-- Servicio para reportes END-->
+
 </beans>

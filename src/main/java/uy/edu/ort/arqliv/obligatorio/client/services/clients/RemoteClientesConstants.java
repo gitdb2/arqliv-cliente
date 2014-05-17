@@ -9,6 +9,8 @@ public interface RemoteClientesConstants {
 	public String ContainerClient = "containerClient";
 
 	public String ArrivalClient = "arrivalClient";
+	
+	public String ReportsClient = "reportsClient";
 
 }
 

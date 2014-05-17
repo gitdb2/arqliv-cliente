@@ -20,8 +20,6 @@ public class MenuProfilingAvg  {
 
 	private boolean toSysOut;
 	
-	
-	
 	public MenuProfilingAvg(boolean toSysOut) {
 		this.toSysOut = toSysOut;
 	}
