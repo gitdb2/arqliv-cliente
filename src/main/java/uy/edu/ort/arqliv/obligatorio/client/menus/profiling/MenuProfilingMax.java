@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.services.clients.ProfilingServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.RemoteClientesConstants;
+import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientesConstants;
 import uy.edu.ort.arqliv.obligatorio.dominio.Pair;
 
 public class MenuProfilingMax {
