@@ -105,9 +105,40 @@ public class MenuArrivalUpdate implements Renderer {
 					.inString("Descipcion de Contenedores ("
 							+ arrival.getContainersDescriptions() + "): ");
 			List<Long> containers = new ArrayList<>();
+//
+//			int incambiaCont = Keyin
+//					.inInt("Cambiar los contenedores (1 si / 0 no)?");
+			
+			int incambiaCont = 0;
+			{
+				boolean exit = false;
+				while (!exit) {
+					char swValue = Keyin.inChar("Cambiar los contenedores? (s/n): ");
 
-			int incambiaCont = Keyin
-					.inInt("Cambiar los contenedores (1 si / 0 no)?");
+					switch (swValue) {
+					case 'n':
+					case 'N':
+						exit = true;
+						incambiaCont = 0;
+						break;
+
+					case 's':
+					case 'S':
+						incambiaCont = 1;
+						exit = true;
+						break;
+
+					default:
+						System.out.println("Valor invalido.");
+						break;
+					}
+				}
+			}
+			
+			
+			
+			
+			boolean hayCambios = false;
 			if (incambiaCont == 1) {
 				System.out.println("Contenedores ("
 						+ generateContainerList(arrival.getContainers())
@@ -126,14 +157,15 @@ public class MenuArrivalUpdate implements Renderer {
 						noMore = true;
 					}
 				} while (!noMore);
+				hayCambios = true;
 			} else {
 				containers = generateContainerList(arrival.getContainers());
 			}
 
-			boolean hayCambios = false;
+		
 
 			if (arrivalDate != null) {
-				if (sdf.format(arrival.getArrivalDate()).equals(fechaArrival)) {
+				if (!sdf.format(arrival.getArrivalDate()).equals(fechaArrival)) {
 					arrival.setArrivalDate(arrivalDate);
 					hayCambios = true;
 				}
