@@ -8,26 +8,18 @@ package uy.edu.ort.arqliv.obligatorio.client.menus;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import uy.edu.ort.arqliv.obligatorio.client.ContextSingleton;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
-import uy.edu.ort.arqliv.obligatorio.client.menus.profiling.MenuProfiling;
 import uy.edu.ort.arqliv.obligatorio.client.menus.arrival.MenuArrival;
 import uy.edu.ort.arqliv.obligatorio.client.menus.container.MenuContainer;
+import uy.edu.ort.arqliv.obligatorio.client.menus.profiling.MenuProfiling;
 import uy.edu.ort.arqliv.obligatorio.client.menus.reports.MenuReports;
 import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient;
-import uy.edu.ort.arqliv.obligatorio.client.services.clients.constants.RemoteClientsConstants;
 
 /**
  * 
  * @author rodrigo
  */
 public class MenuMainScreen implements Renderer {
-
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	Map<String, Renderer> options = new HashMap<>();
 
@@ -87,6 +79,5 @@ public class MenuMainScreen implements Renderer {
 			}
 		}
 	}
-
 
 }

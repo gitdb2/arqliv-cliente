@@ -14,19 +14,12 @@ import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
  */
 public class MenuFirstLoader implements Renderer {
 
-//    Map<MenuRendererEnum, Renderer> options = new HashMap<>();
-//
-//    public void addOptions(MenuRendererEnum option, Renderer renderer) {
-//        this.options.put(option, renderer);
-//    }
-
     @Override
     public void render() {
         int swValue;
 
         boolean exit = false;
         while (!exit) {
-//            System.out.print("\u001b[2J");
             
             System.out.println("============================");
             System.out.println("|       MENU INICIAL       |");
@@ -53,7 +46,6 @@ public class MenuFirstLoader implements Renderer {
                     System.out.println("Saliendo...");
                     exit = true;
                     break;
-            
                 default:
                     System.out.println("Seleccion invalida");
                     break;

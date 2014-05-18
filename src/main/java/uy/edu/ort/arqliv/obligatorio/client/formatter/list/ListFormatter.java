@@ -7,7 +7,6 @@ import uy.edu.ort.arqliv.obligatorio.common.utils.Duple;
 
 public class ListFormatter {
 	
-	
 	List<Duple<Integer, String>> columnTitles = new ArrayList<>();
 	List<List<Object>> columnValues = new ArrayList<>();
 	
@@ -20,7 +19,5 @@ public class ListFormatter {
 		this.columnTitles = columnTitles;
 		this.columnValues = columnValues;
 	}
-	
-	
 	
 }

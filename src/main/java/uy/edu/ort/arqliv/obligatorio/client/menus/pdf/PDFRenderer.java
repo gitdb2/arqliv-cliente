@@ -12,15 +12,11 @@ import org.slf4j.LoggerFactory;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.ColumnText;
-import com.itextpdf.text.pdf.DocumentFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
@@ -31,6 +27,7 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
  * 
  */
 public class PDFRenderer {
+	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	String outputfile;
@@ -40,10 +37,8 @@ public class PDFRenderer {
 	Phrase footer;
 	Font font;
 	final float FONT_SIZE = (float) 7.2;
-//	private int pagenumber = 0;
 
-	public PDFRenderer(String outputfile, String pageHeader, String dataHeader,
-			List<String> lines, String footer) {
+	public PDFRenderer(String outputfile, String pageHeader, String dataHeader, List<String> lines, String footer) {
 		super();
 		font = new Font();
 		font.setSize(FONT_SIZE);
@@ -53,8 +48,6 @@ public class PDFRenderer {
 		} catch (IOException | DocumentException e) {	
 			log.error("Problema al cargar la fuente, usando la por defecto",  e);
 		}
-		
-		
 		this.outputfile = outputfile;
 		this.pageHeader = new Phrase(pageHeader, font);
 		this.dataHeader = new Phrase(dataHeader, font);
@@ -71,8 +64,7 @@ public class PDFRenderer {
 			
 			Document document = new Document(PageSize.A4);
 			
-			PdfWriter.getInstance(document, new FileOutputStream(
-					this.outputfile));
+			PdfWriter.getInstance(document, new FileOutputStream(this.outputfile));
 			document.open();
 
 			document.add(new Paragraph(pageHeader));
@@ -80,7 +72,6 @@ public class PDFRenderer {
 			document.add(new LineSeparator(0.3f, 100, null, 0, -3));
 			document.add(Chunk.NEWLINE);
 			document.add(Chunk.NEWLINE);
-	
 			
 			document.add(dataHeader);
 			document.add(Chunk.NEWLINE);
@@ -96,40 +87,12 @@ public class PDFRenderer {
 			document.add(Chunk.NEWLINE);
 			document.close();
 		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-			log.error("no se encontro el archivo salida", e);
-			throw new RuntimeException("no se encontro el archivo salida", e);
+			log.error("No se encontro el archivo salida", e);
+			throw new RuntimeException("No se encontro el archivo salida", e);
 		} catch (DocumentException e) {
-			//e.printStackTrace();
-			log.error("no se pudo generar el pdf", e);
-			throw new RuntimeException("no se pudo generar el pdf", e);
+			log.error("No se pudo generar el pdf", e);
+			throw new RuntimeException("No se pudo generar el pdf", e);
 		}
 	}
-
-//	public void onStartPage(PdfWriter writer, Document document) {
-//		pagenumber++;
-//	}
-//
-//	public void onEndPage(PdfWriter writer, Document document) {
-//		Rectangle rect = writer.getBoxSize("art");
-//		switch (writer.getPageNumber() % 2) {
-//		case 0:
-//			ColumnText.showTextAligned(writer.getDirectContent(),
-//					Element.ALIGN_RIGHT, pageHeader, rect.getRight(),
-//					rect.getTop(), 0);
-//			break;
-//		case 1:
-//			ColumnText.showTextAligned(writer.getDirectContent(),
-//					Element.ALIGN_LEFT, pageHeader, rect.getLeft(),
-//					rect.getTop(), 0);
-//			break;
-//		}
-//		
-//		ColumnText.showTextAligned(writer.getDirectContent(),
-//				Element.ALIGN_CENTER,
-//				new Phrase(String.format("página %d", pagenumber)),
-//				(rect.getLeft() + rect.getRight()) / 2, rect.getBottom() - 18,
-//				0);
-//	}
 
 }

@@ -9,7 +9,7 @@ import uy.edu.ort.arqliv.obligatorio.client.menus.pdf.PDFRenderer;
 
 public class UtilsMenuProfiling {
 
-	public static final String DATE_PARAMETER_MSG = "Fecha a consultar (formato YYYYMMDD): ";
+	public static final String DATE_PARAMETER_MSG = "Fecha a consultar (formato yyyyMMdd): ";
 	
 	public static final String NO_RECORDS_FOUND_MSG = "No se encontraron datos para la fecha ";
 	
