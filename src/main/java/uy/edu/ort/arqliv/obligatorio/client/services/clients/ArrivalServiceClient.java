@@ -17,7 +17,7 @@ public class ArrivalServiceClient {
 	private ArrivalService arrivalService;
 
 	/**
-	 * TODO
+	 * Setter para inyeccion del servicio spring
 	 * 
 	 * @param containerService
 	 */
@@ -26,8 +26,9 @@ public class ArrivalServiceClient {
 	}
 
 	/**
-	 * TODO
-	 * 
+	 * Crea un arrival en el sistema indicandole el id del barco y 
+	 * la lista de ids de contenedores. retorna el id Del arrival creado
+	 * En caso de error se tira excepcion
 	 * @param arrival
 	 * @param shipId
 	 * @param containers
@@ -41,7 +42,7 @@ public class ArrivalServiceClient {
 	}
 
 	/**
-	 * TODO
+	 *	Listado de todos los arribos en el sistema
 	 * 
 	 * @return
 	 * @throws CustomServiceException
@@ -51,7 +52,10 @@ public class ArrivalServiceClient {
 	}
 
 	/**
-	 * TODO
+	 * Modifica el arrival recibido, se le pasa el id del nuevo barco o 
+	 * el mismo id que tenia si no se modifica, y la nueva lista de ids de contetenedores,
+	 * se deber enviar haya cambiado o no (con los que ya tenia)
+	 * En caso de error se tira excepcion
 	 * @param arrival
 	 * @param shipId
 	 * @param containers
@@ -64,7 +68,7 @@ public class ArrivalServiceClient {
 	}
 
 	/**
-	 * TODO
+	 * Obtiene un arrival por id (carga eaguer de atributos)
 	 * 
 	 * @param id
 	 * @return
@@ -75,7 +79,7 @@ public class ArrivalServiceClient {
 	}
 
 	/**
-	 * TODO
+	 * elimina un arrival por id
 	 * 
 	 * @param id
 	 * @throws CustomServiceException

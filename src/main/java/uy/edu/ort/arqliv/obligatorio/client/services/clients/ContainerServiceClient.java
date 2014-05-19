@@ -17,14 +17,15 @@ public class ContainerServiceClient {
 	private ContainerService containerService;
 
 	/**
-	 * TODO
+	 * setter apra inyeccion de spring
 	 * @param containerService
 	 */
 	public void setcontainerService(ContainerService containerService) {
 		this.containerService = containerService;
 	}
 	/**
-	 * TODO
+	 * Crea un Contenedor en el sistema, se retorna el id
+	 * En caso de error se tira excepcion
 	 * @param ship
 	 * @return
 	 * @throws CustomServiceException
@@ -33,7 +34,7 @@ public class ContainerServiceClient {
 		return containerService.store(MainSingleton.getInstance().getUser(), container);
 	}
 	/**
-	 * TODO
+	 * LIsta todos los contenedores en el sistema
 	 * @return
 	 * @throws CustomServiceException
 	 */
@@ -41,7 +42,7 @@ public class ContainerServiceClient {
 		return containerService.list(MainSingleton.getInstance().getUser());
 	}
 	/**
-	 * TODO
+	 * Actualiza la informacion del contenedor (el campo id debe estar cargado)
 	 * @param ship
 	 * @return
 	 * @throws CustomServiceException
@@ -51,7 +52,7 @@ public class ContainerServiceClient {
 	}
 
 	/**
-	 * TODO
+	 * Se obtiene un contenedor por id
 	 * @param id
 	 * @return
 	 * @throws CustomServiceException
@@ -61,7 +62,7 @@ public class ContainerServiceClient {
 	}
 
 	/**
-	 * TODO
+	 * Elimina un contenedor por id, tira expcion en caso de estar en uso o no poderse realizar la operacion
 	 * @param id
 	 * @throws CustomServiceException
 	 */

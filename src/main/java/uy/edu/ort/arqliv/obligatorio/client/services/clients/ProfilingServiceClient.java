@@ -22,7 +22,7 @@ public class ProfilingServiceClient {
 	}
 
 	/**
-	 * 
+	 * Consulta de tiempo promedio de ejecucion para una fecha determinada
 	 * @param forDate
 	 * @return
 	 * @throws CustomServiceException
@@ -32,7 +32,7 @@ public class ProfilingServiceClient {
 	}
 	
 	/**
-	 * 
+	 *  Consulta de tiempo minimo de ejecucion para una fecha determinada
 	 * @param forDate
 	 * @return
 	 * @throws CustomServiceException
@@ -42,7 +42,7 @@ public class ProfilingServiceClient {
 	}
 	
 	/**
-	 * 
+	 * Consulta de tiempo maximo de ejecucion para una fecha determinada
 	 * @param forDate
 	 * @return
 	 * @throws CustomServiceException

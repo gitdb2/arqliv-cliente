@@ -18,14 +18,14 @@ public class ShipServiceClient {
 	private ShipService shipService;
 
 	/**
-	 * TODO
+	 * Spring injection
 	 * @param shipService
 	 */
 	public void setShipService(ShipService shipService) {
 		this.shipService = shipService;
 	}
 	/**
-	 * TODO
+	 * Crea un barco en la DB y retorna su id
 	 * @param ship
 	 * @return
 	 * @throws CustomServiceException
@@ -34,7 +34,7 @@ public class ShipServiceClient {
 		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 	/**
-	 * TODO
+	 * lista todos los barcos en el sistema
 	 * @return
 	 * @throws CustomServiceException
 	 */
@@ -42,7 +42,9 @@ public class ShipServiceClient {
 		return shipService.list(MainSingleton.getInstance().getUser());
 	}
 	/**
-	 * TODO
+	 * Actualiza la informacion de un barco para una determinada 
+	 * fecha (regla de negocio: no se puede modificar la capacidad de 
+	 * un barco si no arribo al puerto en essa fecha)
 	 * @param ship
 	 * @param arrivalDate
 	 * @return
@@ -53,7 +55,7 @@ public class ShipServiceClient {
 	}
 
 	/**
-	 * TODO
+	 * Retoran un barco por id
 	 * @param id
 	 * @return
 	 * @throws CustomServiceException
@@ -63,7 +65,7 @@ public class ShipServiceClient {
 	}
 
 	/**
-	 * TODO
+	 * da de baja un barco por id, si no esta usado en nungun arribo, de lo contrario tira excpcion
 	 * @param id
 	 * @throws CustomServiceException
 	 */

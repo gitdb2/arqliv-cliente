@@ -21,7 +21,7 @@ public class ReportsServiceClient {
 	}
 
 	/**
-	 * 
+	 * Retorna los arrivals que para un mes (1 Enero)
 	 * @param month
 	 * @return
 	 * @throws CustomServiceException
@@ -30,6 +30,13 @@ public class ReportsServiceClient {
 		return reportsService.arrivalsByMonth(MainSingleton.getInstance().getUser(), month);
 	}
 	
+	/**
+	 * Lista los arrivals filtrando por me y por id barco
+	 * @param month
+	 * @param shipId
+	 * @return
+	 * @throws CustomServiceException
+	 */
 	public List<Arrival> arrivalsByMonthByShip(int month, Long shipId) throws CustomServiceException {
 		return reportsService.arrivalsByMonthByShip(MainSingleton.getInstance().getUser(), month, shipId);
 	}
