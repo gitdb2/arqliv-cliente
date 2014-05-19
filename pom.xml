@@ -38,11 +38,11 @@
 
 		<!-- tag::joda[] -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>joda-time</groupId> -->
-<!-- 			<artifactId>joda-time</artifactId> -->
-<!-- 			<version>2.2</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>joda-time</groupId> -->
+		<!-- <artifactId>joda-time</artifactId> -->
+		<!-- <version>2.2</version> -->
+		<!-- </dependency> -->
 
 		<!-- end::joda[] -->
 
@@ -78,11 +78,11 @@
 			<scope>runtime</scope>
 		</dependency>
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-jetty</artifactId> -->
-<!-- 			<version>1.0.0.RELEASE</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-jetty</artifactId> -->
+		<!-- <version>1.0.0.RELEASE</version> -->
+		<!-- </dependency> -->
 
 		<dependency>
 			<groupId>uy.edu.ort.arqliv.obligatorio</groupId>
@@ -138,7 +138,20 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -161,6 +174,35 @@
 				</executions>
 			</plugin>
 		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 
