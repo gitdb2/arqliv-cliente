@@ -20,8 +20,6 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Departure;
 public class MenuDepartureCreate implements Renderer {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private SimpleDateFormat sdfOut = new SimpleDateFormat("dd/MM/yyyy");
-
 	@Override
 	public void render() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -55,10 +53,10 @@ public class MenuDepartureCreate implements Renderer {
 		String shipDestination =  Keyin.inString("Pais de destino (string): ");
 		
 		boolean forceShipId = true;
-		long ship = 0;
+		long shipId = 0;
 		do {
-			ship = Keyin.inInt ("ID barco (int): ");
-			if (ship > 0) {
+			shipId = Keyin.inInt ("ID barco (int): ");
+			if (shipId > 0) {
 				forceShipId = false;
 			} else {
 				System.out.println("Error el id de barco debe ser > 0. Intente de nuevo");
@@ -90,7 +88,7 @@ public class MenuDepartureCreate implements Renderer {
 
 		boolean exit = false;
 		while (!exit) {
-			printDeparture(departure, containers, ship);
+			DepartureMenuUtils.printDepartureCreate(departure, containers, shipId);
 			char swValue = Keyin.inChar(" Dar de Alta (s/n): ");
 			
 			switch (swValue) {
@@ -107,7 +105,7 @@ public class MenuDepartureCreate implements Renderer {
 					DepartureServiceClient client = (DepartureServiceClient) ContextSingleton
 							.getInstance().getBean(RemoteClientsConstants.DepartureClient);
 
-					Long idGenerated = client.create(departure, ship, containers);
+					Long idGenerated = client.create(departure, shipId, containers);
 					System.out.println("Partida creado correctamente con id: " + idGenerated);
 					exit = true;
 					
@@ -130,16 +128,6 @@ public class MenuDepartureCreate implements Renderer {
 			}
 
 		}
-	}
-
-	private void printDeparture(Departure departure, List<Long> contenedores, long shipId) {
-		System.out.println("========================");
-		System.out.println("Fecha de partida:   " + sdfOut.format(departure.getDepartureDate()));
-		System.out.println("Id de barco:        " + shipId);
-		System.out.println("Pais de Destino:    " + departure.getShipDestination());
-		System.out.println("Ids contenedores:   " + contenedores);
-		System.out.println("Desc. Contenedores: " + departure.getContainersDescriptions());
-		System.out.println("========================");
 	}
 
 }

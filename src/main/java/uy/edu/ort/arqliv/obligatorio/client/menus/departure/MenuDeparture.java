@@ -34,22 +34,17 @@ public class MenuDeparture implements Renderer{
 			case 1:
 				System.out.println("abriendo menu Alta...");
 				new MenuDepartureCreate().render();
-
 				break;
 			case 2:
 				System.out.println("abriendo menu Baja...");
 				new MenuDepartureDelete().render();
-				
 				break;
 			case 3:
 				System.out.println("abriendo menu Modificar...");
 				new MenuDepartureUpdate().render();
-				
-			
 				break;
 			case 4:
-				System.out
-				.println("Listando...");
+				System.out.println("Listando...");
 				new MenuDepartureList(true).render();
 				break;
 			case 5:

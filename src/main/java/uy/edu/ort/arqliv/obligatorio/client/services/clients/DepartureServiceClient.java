@@ -21,7 +21,7 @@ public class DepartureServiceClient {
 	 * 
 	 * @param departureService
 	 */
-	public void setArrivalService(DepartureService departureService) {
+	public void setDepartureService(DepartureService departureService) {
 		this.departureService = departureService;
 	}
 
@@ -32,7 +32,7 @@ public class DepartureServiceClient {
 	 * @param departure
 	 * @param shipId
 	 * @param containers
-	 * @return el id Del arrival creado
+	 * @return el id del departure creado
 	 * @throws CustomServiceException
 	 */
 	public Long create(Departure departure, Long shipId, List<Long> containers) throws CustomServiceException {

@@ -11,6 +11,7 @@ import java.util.Map;
 import uy.edu.ort.arqliv.obligatorio.client.Keyin;
 import uy.edu.ort.arqliv.obligatorio.client.menus.arrival.MenuArrival;
 import uy.edu.ort.arqliv.obligatorio.client.menus.container.MenuContainer;
+import uy.edu.ort.arqliv.obligatorio.client.menus.departure.MenuDeparture;
 import uy.edu.ort.arqliv.obligatorio.client.menus.profiling.MenuProfiling;
 import uy.edu.ort.arqliv.obligatorio.client.menus.reports.MenuReports;
 import uy.edu.ort.arqliv.obligatorio.client.menus.ship.MenuShip;
@@ -41,8 +42,9 @@ public class MenuMainScreen implements Renderer {
 			System.out.println("|        1. Barcos         |");
 			System.out.println("|        2. Contenedores   |");
 			System.out.println("|        3. Arribos        |");
-			System.out.println("|        4. Reportes       |");
-			System.out.println("|        5. Profiling      |");
+			System.out.println("|        4. Partidas       |");
+			System.out.println("|        5. Reportes       |");
+			System.out.println("|        6. Profiling      |");
 			System.out.println("|        0. Salir          |");
 			System.out.println("============================");
 
@@ -66,10 +68,14 @@ public class MenuMainScreen implements Renderer {
 				new MenuArrival().render();
 				break;
 			case 4:
+				System.out.println("abriendo menu Partidas...");
+				new MenuDeparture().render();
+				break;
+			case 5:
 				System.out.println("abriendo menu Reportes...");
 				new MenuReports().render();
 				break;
-			case 5:
+			case 6:
 				System.out.println("abriendo menu Profiling...");
 				new MenuProfiling().render();
 				break;

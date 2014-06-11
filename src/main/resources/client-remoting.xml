@@ -70,4 +70,15 @@
 	</bean>
 <!-- Servicio para reportes END-->
 
+<!-- Servicio para reportes INI-->
+	<bean id="departureClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.DepartureServiceClient">
+		<property name="departureService" ref="departureService" />
+	</bean>
+
+	<bean id="departureService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/DepartureService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.DepartureService" />
+	</bean>
+<!-- Servicio para reportes END-->
+
 </beans>
