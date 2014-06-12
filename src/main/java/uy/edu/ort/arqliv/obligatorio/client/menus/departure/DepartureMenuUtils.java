@@ -13,7 +13,7 @@ public class DepartureMenuUtils {
 	
 	public static void printDeparture(Departure departure, String operation) {
 		System.out.println("===============================");
-		System.out.println("========= " + operation + "id: " + departure.getId());
+		System.out.println("========= " + operation + " id: " + departure.getId());
 		System.out.println("===============================");
 		System.out.println("Fecha de partida:   " + sdfOut.format(departure.getDepartureDate()));
 		System.out.println("Id de barco:        " + departure.getShip().getId());
@@ -42,7 +42,5 @@ public class DepartureMenuUtils {
 		System.out.println("Desc. Contenedores: " + departure.getContainersDescriptions());
 		System.out.println("========================");
 	}
-
-	
 	
 }

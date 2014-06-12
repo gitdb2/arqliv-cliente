@@ -28,7 +28,7 @@ public class MenuDepartureList implements Renderer {
 	public void render() {
 		try {
 			DepartureServiceClient client = (DepartureServiceClient) ContextSingleton
-					.getInstance().getBean(RemoteClientsConstants.ArrivalClient);
+					.getInstance().getBean(RemoteClientsConstants.DepartureClient);
 
 			List<Departure> departures = client.list();
 
