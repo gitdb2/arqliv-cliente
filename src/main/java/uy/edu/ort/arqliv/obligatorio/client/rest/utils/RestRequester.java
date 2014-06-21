@@ -3,6 +3,8 @@ package uy.edu.ort.arqliv.obligatorio.client.rest.utils;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -28,6 +30,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class RestRequester<T> {
 
+
+	private static final Logger logger = LoggerFactory.getLogger(RestRequester.class);
+
 	private RestTemplate restTemplate;
 
 	public RestRequester() {
@@ -44,10 +49,10 @@ public class RestRequester<T> {
 	 * @param method
 	 * @return
 	 */
-	public T send(String url, HttpMethod method,
-			ParameterizedTypeReference<T> typeRef)
+	public T request(String url, HttpMethod method,
+			ParameterizedTypeReference<T> typeRef, Object... uriVariables)
 			throws CustomServiceException {
-		return send(url, method, null, typeRef);
+		return request(url, method, null, typeRef, uriVariables);
 	}
 
 	/**
@@ -58,7 +63,7 @@ public class RestRequester<T> {
 	 * @param uriVariables
 	 * @return
 	 */
-	public T send(String url, HttpMethod method, HttpEntity<?> requestEntity,
+	public T request(String url, HttpMethod method, HttpEntity<?> requestEntity,
 			ParameterizedTypeReference<T> typeRef, Object... uriVariables)
 			throws CustomServiceException {
 		T result = null;
@@ -66,21 +71,14 @@ public class RestRequester<T> {
 			ResponseEntity<T> response = this.restTemplate.exchange(url,
 					method, requestEntity, typeRef, uriVariables);
 			result = response.getBody();
-			System.out.println(result);
 
 		} catch (HttpServerErrorException | HttpClientErrorException e) {
-			System.out.println(e.getStatusCode());
 			String errorpayload = e.getResponseBodyAsString();
 			ObjectMapper mapper = new ObjectMapper(); // can reuse, share
 			ErrorInfo errorInfo = null; // globally
 			try {
 				errorInfo = mapper.readValue(errorpayload, ErrorInfo.class);
-				System.out.println(errorInfo);
-				// throw new CustomServiceException(errorInfo.getMessage());
-//				errorInfo.setExceptionClassName("uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomInUseServiceException");
-//
-
-				
+			
 				if (errorInfo.getExceptionClassName() != null) {
 
 					Class<?> c = Class.forName(errorInfo
@@ -92,34 +90,34 @@ public class RestRequester<T> {
 				}
 
 			} catch (JsonParseException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (JsonMappingException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (ClassNotFoundException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (InstantiationException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (IllegalAccessException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (IllegalArgumentException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (InvocationTargetException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (NoSuchMethodException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			} catch (SecurityException e1) {
-				e1.printStackTrace();
+				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			}
 		}
