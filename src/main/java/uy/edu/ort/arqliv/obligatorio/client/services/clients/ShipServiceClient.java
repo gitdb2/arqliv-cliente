@@ -21,10 +21,11 @@ public class ShipServiceClient {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private String BASE_URL = "http://localhost:8080/arqliv-web/rest"+"/ships";
-	private String LIST   = "/list?user={user}";
-	private String CREATE = "/create?user={user}";
-	private String UPDATE = "/update?user={user}&arrivalDate={arrivalDate}";
-	private String FIND = "/find/{id}?user={user}";
+	private String LIST   	= "/list?user={user}";
+	private String CREATE 	= "/create?user={user}";
+	private String UPDATE	= "/update?user={user}&arrivalDate={arrivalDate}";
+	private String FIND   	= "/find/{id}?user={user}";
+	private String DELETE  	= "/delete/{id}?user={user}";
 	
 	
 	private RestRequester<List<Ship>> shipListRequester;
@@ -105,6 +106,8 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public void delete(long id) throws CustomServiceException {
-		//shipService.delete(MainSingleton.getInstance().getUser(), id);
+		longRequester.delete(BASE_URL+DELETE, 	
+				id,
+				MainSingleton.getInstance().getUser());
 	}
 }

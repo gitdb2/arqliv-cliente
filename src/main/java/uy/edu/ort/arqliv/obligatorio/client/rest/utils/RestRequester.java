@@ -13,6 +13,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
@@ -121,6 +122,8 @@ public class RestRequester<T> {
 				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			}
+		} catch (ResourceAccessException e1) {
+			throw new CustomServiceException(e1.getMessage(), e1);
 		}
 		return result;
 
@@ -189,9 +192,71 @@ public class RestRequester<T> {
 				logger.error(e1.getMessage(), e1);
 				throw new CustomServiceException(e1.getMessage(), e1);
 			}
+		} catch (ResourceAccessException e1) {
+			throw new CustomServiceException(e1.getMessage(), e1);
 		}
 		return result;
 
 	}
 
+	
+	public void delete(String url, Object... uriVariables) {
+		T result = null;
+		try {
+			restTemplate.delete(url, uriVariables);
+
+		} catch (HttpServerErrorException | HttpClientErrorException e) {
+			String errorpayload = e.getResponseBodyAsString();
+			ObjectMapper mapper = new ObjectMapper(); // can reuse, share
+			ErrorInfo errorInfo = null; // globally
+			try {
+				errorInfo = mapper.readValue(errorpayload, ErrorInfo.class);
+
+				if (errorInfo.getExceptionClassName() != null) {
+
+					Class<?> c = Class.forName(errorInfo
+							.getExceptionClassName());
+					CustomServiceException ex = (CustomServiceException) c
+							.getConstructor(String.class).newInstance(
+									errorInfo.getMessage());
+					throw ex;
+
+				}
+
+			} catch (JsonParseException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (JsonMappingException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (IOException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (ClassNotFoundException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (InstantiationException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (IllegalAccessException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (IllegalArgumentException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (InvocationTargetException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (NoSuchMethodException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			} catch (SecurityException e1) {
+				logger.error(e1.getMessage(), e1);
+				throw new CustomServiceException(e1.getMessage(), e1);
+			}
+		} catch (ResourceAccessException e1) {
+			throw new CustomServiceException(e1.getMessage(), e1);
+		}
+	}
+	
 }
