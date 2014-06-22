@@ -14,9 +14,9 @@ public class Pruebas2 {
 	
 		RestRequester<List<Ship>> requester = new RestRequester<>();
 		
-		List<Ship> ships = requester.send("http://localhost:8080/arqliv-web/rest/ships/list.json", HttpMethod.GET, new ParameterizedTypeReference<List<Ship>>() {});
+		List<Ship> ships = requester.request("http://localhost:8080/arqliv-web/rest/ships/list.json", HttpMethod.GET, new ParameterizedTypeReference<List<Ship>>() {});
 		
-		List<Ship> ships2 = requester.send("http://localhost:8080/arqliv-web/rest/ships/error.json", HttpMethod.GET, new ParameterizedTypeReference<List<Ship>>() {});
+		List<Ship> ships2 = requester.request("http://localhost:8080/arqliv-web/rest/ships/error.json", HttpMethod.GET, new ParameterizedTypeReference<List<Ship>>() {});
 		
 	}
 

@@ -92,9 +92,13 @@ public class MenuShipList implements Renderer {
 
 		} catch (CustomServiceException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			log.error(e.getMessage(), e);
+			System.out.println("ERROR: "+ e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			log.error(e.getMessage(), e);
+			System.out.println("ERROR: "+ e.getMessage());
 		}
 
 		Keyin.inChar("presione enter tecla para volver...");

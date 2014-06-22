@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+<!-- 	<bean id="loginClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.LoginServiceClient"> -->
+<!-- 		<property name="loginService" ref="loginService" /> -->
+<!-- 	</bean> -->
+
+<!-- 	<bean id="loginService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean"> -->
+<!-- 		<property name="serviceUrl" value="rmi://192.168.1.139:1199/LoginService" /> -->
+<!-- 		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.LoginService" /> -->
+<!-- 	</bean> -->
+
+<!-- Servicio para ship INI-->
+	<bean id="shipClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient">
+		<property name="shipService" ref="shipService" />
+	</bean>
+
+	<bean id="shipService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ShipService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ShipService" />
+	</bean>
+<!-- Servicio para ship END-->
+
+<!-- Servicio para profiling INI-->
+	<bean id="profilingClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ProfilingServiceClient">
+		<property name="profilingService" ref="profilingService" />
+	</bean>
+
+	<bean id="profilingService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ProfilingService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ProfilingService" />
+	</bean>
+<!-- Servicio para profiling END-->
+
+<!-- Servicio para container INI-->
+	<bean id="containerClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ContainerServiceClient">
+		<property name="containerService" ref="containerService" />
+	</bean>
+
+	<bean id="containerService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ContainerService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ContainerService" />
+	</bean>
+<!-- Servicio para container END-->
+
+<!-- Servicio para arrival INI-->
+	<bean id="arrivalClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ArrivalServiceClient">
+		<property name="arrivalService" ref="arrivalService" />
+	</bean>
+
+	<bean id="arrivalService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ArrivalService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ArrivalService" />
+	</bean>
+<!-- Servicio para arrival END-->
+
+<!-- Servicio para reportes INI-->
+	<bean id="reportsClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ReportsServiceClient">
+		<property name="reportsService" ref="reportsService" />
+	</bean>
+
+	<bean id="reportsService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/ReportsService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.ReportsService" />
+	</bean>
+<!-- Servicio para reportes END-->
+
+<!-- Servicio para reportes INI-->
+	<bean id="departureClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.DepartureServiceClient">
+		<property name="departureService" ref="departureService" />
+	</bean>
+
+	<bean id="departureService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1199/DepartureService" />
+		<property name="serviceInterface" value="uy.edu.ort.arqliv.obligatorio.common.DepartureService" />
+	</bean>
+<!-- Servicio para reportes END-->
+
+</beans>

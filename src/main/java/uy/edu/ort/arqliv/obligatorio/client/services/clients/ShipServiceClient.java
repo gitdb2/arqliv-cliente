@@ -3,8 +3,11 @@ package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+
+import uy.edu.ort.arqliv.obligatorio.client.rest.utils.RestRequester;
 import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
-import uy.edu.ort.arqliv.obligatorio.common.ShipService;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
 
@@ -15,15 +18,30 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
  */
 public class ShipServiceClient {
 
-	private ShipService shipService;
+	
+	private final String SERVER 	= MainSingleton
+										.getInstance()
+										.getProperty("rest.server", "http://localhost:8080/arqliv-web/rest");
+	private final String ENTITY 	= "/ships";
+	private final String BASE_URL 	= SERVER + ENTITY;
+	
+	private final String LIST   	= "/list?user={user}";
+	private final String CREATE 	= "/create?user={user}";
+	private final String UPDATE		= "/update?user={user}&arrivalDate={arrivalDate}";
+	private final String FIND   	= "/find/{id}?user={user}";
+	private final String DELETE  	= "/delete/{id}?user={user}";
+	
+	
+	private RestRequester<List<Ship>> listRequester;
+	private RestRequester<Ship> objectRequester;
+	private RestRequester<Long> longRequester;
 
-	/**
-	 * Spring injection
-	 * @param shipService
-	 */
-	public void setShipService(ShipService shipService) {
-		this.shipService = shipService;
+	public ShipServiceClient(){
+		listRequester = new RestRequester<>();
+		objectRequester = new RestRequester<>();
+		longRequester = new RestRequester<>();
 	}
+	
 	/**
 	 * Crea un barco en la DB y retorna su id
 	 * @param ship
@@ -31,7 +49,12 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long create(Ship ship) throws CustomServiceException {
-		return shipService.store(MainSingleton.getInstance().getUser(), ship);
+
+		return longRequester.postObject(
+				BASE_URL+CREATE,
+				ship, 
+				Long.class,
+				MainSingleton.getInstance().getUser());
 	}
 	/**
 	 * lista todos los barcos en el sistema
@@ -39,7 +62,11 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public List<Ship> list() throws CustomServiceException {
-		return shipService.list(MainSingleton.getInstance().getUser());
+		return listRequester.request(
+					BASE_URL+LIST, 
+					HttpMethod.GET, 
+					new ParameterizedTypeReference<List<Ship>>() {}, 
+					MainSingleton.getInstance().getUser());
 	}
 	/**
 	 * Actualiza la informacion de un barco para una determinada 
@@ -51,7 +78,12 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long update(Ship ship, Date arrivalDate) throws CustomServiceException {
-		return shipService.update(MainSingleton.getInstance().getUser(), ship, arrivalDate);
+		return longRequester.postObject(
+				BASE_URL+UPDATE,
+				ship, 
+				Long.class,
+				MainSingleton.getInstance().getUser(), 
+				RestRequester.formatDate(arrivalDate));
 	}
 
 	/**
@@ -61,7 +93,15 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Ship find(long id) throws CustomServiceException {
-		return shipService.find(MainSingleton.getInstance().getUser(), id);
+		return objectRequester.request(
+				BASE_URL+FIND, 
+				HttpMethod.GET, 
+				new ParameterizedTypeReference<Ship>() {},
+				id,
+				MainSingleton.getInstance().getUser()
+				);
+
+		//return shipService.find(MainSingleton.getInstance().getUser(), id);
 	}
 
 	/**
@@ -70,6 +110,8 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public void delete(long id) throws CustomServiceException {
-		shipService.delete(MainSingleton.getInstance().getUser(), id);
+		longRequester.delete(BASE_URL+DELETE, 	
+				id,
+				MainSingleton.getInstance().getUser());
 	}
 }
