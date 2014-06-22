@@ -1,6 +1,5 @@
 package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -19,13 +18,18 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
  */
 public class ShipServiceClient {
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	private String BASE_URL = "http://localhost:8080/arqliv-web/rest"+"/ships";
-	private String LIST   	= "/list?user={user}";
-	private String CREATE 	= "/create?user={user}";
-	private String UPDATE	= "/update?user={user}&arrivalDate={arrivalDate}";
-	private String FIND   	= "/find/{id}?user={user}";
-	private String DELETE  	= "/delete/{id}?user={user}";
+	
+	private final String SERVER 	= MainSingleton
+										.getInstance()
+										.getProperty("rest.server", "http://localhost:8080/arqliv-web/rest");
+	private final String ENTITY 	= "/ships";
+	private final String BASE_URL 	= SERVER + ENTITY;
+	
+	private final String LIST   	= "/list?user={user}";
+	private final String CREATE 	= "/create?user={user}";
+	private final String UPDATE		= "/update?user={user}&arrivalDate={arrivalDate}";
+	private final String FIND   	= "/find/{id}?user={user}";
+	private final String DELETE  	= "/delete/{id}?user={user}";
 	
 	
 	private RestRequester<List<Ship>> listRequester;
@@ -79,7 +83,7 @@ public class ShipServiceClient {
 				ship, 
 				Long.class,
 				MainSingleton.getInstance().getUser(), 
-				sdf.format(arrivalDate));
+				RestRequester.formatDate(arrivalDate));
 	}
 
 	/**

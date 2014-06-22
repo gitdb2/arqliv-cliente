@@ -16,13 +16,16 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Container;
  *
  */
 public class ContainerServiceClient {
-
-	private String BASE_URL = "http://localhost:8080/arqliv-web/rest"+"/containers";
-	private String LIST   	= "/list?user={user}";
-	private String CREATE 	= "/create?user={user}";
-	private String UPDATE	= "/update?user={user}";
-	private String FIND   	= "/find/{id}?user={user}";
-	private String DELETE  	= "/delete/{id}?user={user}";
+	private final String SERVER		= MainSingleton
+										.getInstance()
+										.getProperty("rest.server", "http://localhost:8080/arqliv-web/rest");
+	private final String ENTITY 	= "/containers";
+	private final String BASE_URL	= SERVER + ENTITY;
+	private final String LIST   	= "/list?user={user}";
+	private final String CREATE 	= "/create?user={user}";
+	private final String UPDATE		= "/update?user={user}";
+	private final String FIND   	= "/find/{id}?user={user}";
+	private final String DELETE  	= "/delete/{id}?user={user}";
 	
 	
 	private RestRequester<List<Container>> listRequester;

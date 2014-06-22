@@ -2,8 +2,11 @@ package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 
 import java.util.List;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+
+import uy.edu.ort.arqliv.obligatorio.client.rest.utils.RestRequester;
 import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
-import uy.edu.ort.arqliv.obligatorio.common.DepartureService;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Departure;
 
@@ -13,16 +16,26 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Departure;
  * 
  */
 public class DepartureServiceClient {
+	
+	private final String SERVER		= MainSingleton
+										.getInstance()
+										.getProperty("rest.server", "http://localhost:8080/arqliv-web/rest");
+	private final String ENTITY 	= "/departures";
+	private final String BASE_URL 	= SERVER + ENTITY;
+	private final String LIST   	= "/list?user={user}";
+	private final String CREATE 	= "/create?user={user}&shipId={shipId}&containers={containers}";
+	private final String UPDATE		= "/update?user={user}&shipId={shipId}&containers={containers}";
+	private final String FIND   	= "/find/{id}?user={user}";
+	private final String DELETE  	= "/delete/{id}?user={user}";
 
-	private DepartureService departureService;
+	private RestRequester<List<Departure>> listRequester;
+	private RestRequester<Departure> objectRequester;
+	private RestRequester<Long> longRequester;
 
-	/**
-	 * Setter para inyeccion del servicio spring
-	 * 
-	 * @param departureService
-	 */
-	public void setDepartureService(DepartureService departureService) {
-		this.departureService = departureService;
+	public DepartureServiceClient(){
+		listRequester = new RestRequester<>();
+		objectRequester = new RestRequester<>();
+		longRequester = new RestRequester<>();
 	}
 
 	/**
@@ -36,7 +49,13 @@ public class DepartureServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long create(Departure departure, Long shipId, List<Long> containers) throws CustomServiceException {
-		return departureService.store(MainSingleton.getInstance().getUser(), departure, shipId, containers);
+		return longRequester.postObject(
+				BASE_URL+CREATE,
+				departure, 
+				Long.class,
+				MainSingleton.getInstance().getUser(), 
+				shipId,
+				RestRequester.parametrizeLongList(containers));
 	}
 
 	/**
@@ -46,7 +65,11 @@ public class DepartureServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public List<Departure> list() throws CustomServiceException {
-		return departureService.list(MainSingleton.getInstance().getUser());
+		return listRequester.request(
+				BASE_URL+LIST, 
+				HttpMethod.GET, 
+				new ParameterizedTypeReference<List<Departure>>() {}, 
+				MainSingleton.getInstance().getUser());
 	}
 
 	/**
@@ -61,7 +84,13 @@ public class DepartureServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long update(Departure departure, Long shipId, List<Long> containers) throws CustomServiceException {
-		return departureService.update(MainSingleton.getInstance().getUser(), departure, shipId, containers);
+		return longRequester.postObject(
+				BASE_URL+UPDATE,
+				departure, 
+				Long.class,
+				MainSingleton.getInstance().getUser(), 
+				shipId,
+				RestRequester.parametrizeLongList(containers));
 	}
 
 	/**
@@ -72,7 +101,13 @@ public class DepartureServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Departure find(long id) throws CustomServiceException {
-		return  departureService.find(MainSingleton.getInstance().getUser(), id);
+		return objectRequester.request(
+				BASE_URL+FIND, 
+				HttpMethod.GET,
+				new ParameterizedTypeReference<Departure>() {},
+				id,
+				MainSingleton.getInstance().getUser()
+				);
 	}
 
 	/**
@@ -82,7 +117,8 @@ public class DepartureServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public void delete(long id) throws CustomServiceException {
-		departureService.delete(MainSingleton.getInstance().getUser(), id);
-	}
+		longRequester.delete(BASE_URL+DELETE, 	
+				id,
+				MainSingleton.getInstance().getUser());	}
 	
 }

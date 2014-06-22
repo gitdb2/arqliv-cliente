@@ -15,10 +15,6 @@ public class ContextSingleton {
 
 	private static ContextSingleton instance = new ContextSingleton();
 	private ApplicationContext ctx;
-//	private ContextSingleton(){
-//		ctx = new ClassPathXmlApplicationContext(new String[] { "client-remoting.xml" });
-//	}
-	
 	
 	private ContextSingleton() {
 

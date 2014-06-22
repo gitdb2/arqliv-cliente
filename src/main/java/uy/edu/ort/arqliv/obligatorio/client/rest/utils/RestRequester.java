@@ -2,6 +2,9 @@ package uy.edu.ort.arqliv.obligatorio.client.rest.utils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -35,7 +39,28 @@ public class RestRequester<T> {
 			.getLogger(RestRequester.class);
 
 	private RestTemplate restTemplate;
+	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
+	/**
+	 * Transforma una lista de Long a un string compatible con parametro list de spring controller
+	 * @param containers
+	 * @return
+	 */
+	public static String parametrizeLongList(List<Long> containers){
+		return StringUtils.arrayToCommaDelimitedString(containers.toArray());
+	}
+	
+	/**
+	 * Transforma una fecha al formato compatible del sistema
+	 * @param date
+	 * @return
+	 */
+	public static String formatDate(Date date){
+		return sdf.format(date);
+	}
+	
+	
+	
 	public RestRequester() {
 		this.restTemplate = new RestTemplate();
 		this.restTemplate.getMessageConverters().add(

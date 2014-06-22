@@ -1,19 +1,14 @@
 package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.util.StringUtils;
 
 import uy.edu.ort.arqliv.obligatorio.client.rest.utils.RestRequester;
 import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
-import uy.edu.ort.arqliv.obligatorio.common.ArrivalService;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Arrival;
-import uy.edu.ort.arqliv.obligatorio.dominio.Container;
-import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
 
 /**
  * 
@@ -21,13 +16,17 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
  * 
  */
 public class ArrivalServiceClient {
-
-	private String BASE_URL = "http://localhost:8080/arqliv-web/rest"+"/arrivals";
-	private String LIST   	= "/list?user={user}";
-	private String CREATE 	= "/create?user={user}&shipId={shipId}&containers={containers}";
-	private String UPDATE	= "/update?user={user}&shipId={shipId}&containers={containers}";
-	private String FIND   	= "/find/{id}?user={user}";
-	private String DELETE  	= "/delete/{id}?user={user}";
+	private final String SERVER		= MainSingleton
+										.getInstance()
+										.getProperty("rest.server", "http://localhost:8080/arqliv-web/rest");
+	private final String ENTITY 	= "/arrivals";
+	private final String BASE_URL	= SERVER + ENTITY;
+	
+	private final String LIST   	= "/list?user={user}";
+	private final String CREATE 	= "/create?user={user}&shipId={shipId}&containers={containers}";
+	private final String UPDATE		= "/update?user={user}&shipId={shipId}&containers={containers}";
+	private final String FIND   	= "/find/{id}?user={user}";
+	private final String DELETE  	= "/delete/{id}?user={user}";
 	
 	
 	private RestRequester<List<Arrival>> listRequester;
@@ -41,10 +40,7 @@ public class ArrivalServiceClient {
 	}
 
 	
-	private String parametrizeContainers(List<Long> containers){
-		
-		return StringUtils.arrayToCommaDelimitedString(containers.toArray());
-	}
+	
 	/**
 	 * Crea un arrival en el sistema indicandole el id del barco y 
 	 * la lista de ids de contenedores. retorna el id Del arrival creado
@@ -64,9 +60,7 @@ public class ArrivalServiceClient {
 				Long.class,
 				MainSingleton.getInstance().getUser(), 
 				shipId,
-				parametrizeContainers(containers));
-//		return arrivalService.store(MainSingleton.getInstance().getUser(),
-//				arrival, shipId, containers);
+				RestRequester.parametrizeLongList(containers));
 	}
 
 	/**
@@ -81,8 +75,6 @@ public class ArrivalServiceClient {
 				HttpMethod.GET, 
 				new ParameterizedTypeReference<List<Arrival>>() {}, 
 				MainSingleton.getInstance().getUser());
-		
-		//return arrivalService.list(MainSingleton.getInstance().getUser());
 	}
 
 	/**
@@ -103,9 +95,7 @@ public class ArrivalServiceClient {
 				Long.class,
 				MainSingleton.getInstance().getUser(), 
 				shipId,
-				parametrizeContainers(containers));
-//		return arrivalService.update(MainSingleton.getInstance().getUser(),
-//				arrival, shipId, containers);
+				RestRequester.parametrizeLongList(containers));
 	}
 
 	/**
@@ -123,7 +113,6 @@ public class ArrivalServiceClient {
 				id,
 				MainSingleton.getInstance().getUser()
 				);
-//		return  arrivalService.find(MainSingleton.getInstance().getUser(), id);
 	}
 
 	/**
@@ -136,6 +125,5 @@ public class ArrivalServiceClient {
 		longRequester.delete(BASE_URL+DELETE, 	
 				id,
 				MainSingleton.getInstance().getUser());
-//		arrivalService.delete(MainSingleton.getInstance().getUser(), id);
 	}
 }

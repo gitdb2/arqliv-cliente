@@ -36,19 +36,19 @@ public class MenuReports implements Renderer {
 				break;
 			case 1:
 				new MenuReportArrivalsByMonth(true).render();
-				exit = true;
+//				exit = true;
 				break;
 			case 2:
 				new MenuReportArrivalsByMonthByShip(true).render();
-				exit = true;
+//				exit = true;
 				break;
 			case 3:
 				new MenuReportArrivalsByMonth(false).render();
-				exit = true;
+//				exit = true;
 				break;
 			case 4:
 				new MenuReportArrivalsByMonthByShip(false).render();
-				exit = true;
+//				exit = true;
 				break;
 			default:
 				System.out.println("Valor invalido");
