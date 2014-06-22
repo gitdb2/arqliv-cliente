@@ -28,13 +28,13 @@ public class ShipServiceClient {
 	private String DELETE  	= "/delete/{id}?user={user}";
 	
 	
-	private RestRequester<List<Ship>> shipListRequester;
-	private RestRequester<Ship> shipRequester;
+	private RestRequester<List<Ship>> listRequester;
+	private RestRequester<Ship> objectRequester;
 	private RestRequester<Long> longRequester;
 
 	public ShipServiceClient(){
-		shipListRequester = new RestRequester<>();
-		shipRequester = new RestRequester<>();
+		listRequester = new RestRequester<>();
+		objectRequester = new RestRequester<>();
 		longRequester = new RestRequester<>();
 	}
 	
@@ -58,7 +58,7 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public List<Ship> list() throws CustomServiceException {
-		return shipListRequester.request(
+		return listRequester.request(
 					BASE_URL+LIST, 
 					HttpMethod.GET, 
 					new ParameterizedTypeReference<List<Ship>>() {}, 
@@ -89,7 +89,7 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Ship find(long id) throws CustomServiceException {
-		return shipRequester.request(
+		return objectRequester.request(
 				BASE_URL+FIND, 
 				HttpMethod.GET, 
 				new ParameterizedTypeReference<Ship>() {},

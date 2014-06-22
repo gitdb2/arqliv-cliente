@@ -69,11 +69,13 @@ public class RestRequester<T> {
 			Object... uriVariables) throws CustomServiceException {
 		T result = null;
 		try {
-			ResponseEntity<T> response = this.restTemplate.exchange(url,
-					method, requestEntity, typeRef, uriVariables);
+			ResponseEntity<T> response = this.restTemplate.exchange(url, method, requestEntity, typeRef, uriVariables);
 			result = response.getBody();
 
 		} catch (HttpServerErrorException | HttpClientErrorException e) {
+			logger.error(e.getMessage(), e);
+			e.printStackTrace();
+			
 			String errorpayload = e.getResponseBodyAsString();
 			ObjectMapper mapper = new ObjectMapper(); // can reuse, share
 			ErrorInfo errorInfo = null; // globally

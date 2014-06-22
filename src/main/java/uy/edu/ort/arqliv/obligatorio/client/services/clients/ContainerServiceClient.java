@@ -2,8 +2,11 @@ package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 
 import java.util.List;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+
+import uy.edu.ort.arqliv.obligatorio.client.rest.utils.RestRequester;
 import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
-import uy.edu.ort.arqliv.obligatorio.common.ContainerService;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Container;
 
@@ -14,15 +17,25 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Container;
  */
 public class ContainerServiceClient {
 
-	private ContainerService containerService;
+	private String BASE_URL = "http://localhost:8080/arqliv-web/rest"+"/containers";
+	private String LIST   	= "/list?user={user}";
+	private String CREATE 	= "/create?user={user}";
+	private String UPDATE	= "/update?user={user}";
+	private String FIND   	= "/find/{id}?user={user}";
+	private String DELETE  	= "/delete/{id}?user={user}";
+	
+	
+	private RestRequester<List<Container>> listRequester;
+	private RestRequester<Container> objectRequester;
+	private RestRequester<Long> longRequester;
 
-	/**
-	 * setter apra inyeccion de spring
-	 * @param containerService
-	 */
-	public void setcontainerService(ContainerService containerService) {
-		this.containerService = containerService;
+	public ContainerServiceClient(){
+		listRequester = new RestRequester<>();
+		objectRequester = new RestRequester<>();
+		longRequester = new RestRequester<>();
 	}
+
+	
 	/**
 	 * Crea un Contenedor en el sistema, se retorna el id
 	 * En caso de error se tira excepcion
@@ -31,7 +44,12 @@ public class ContainerServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long create(Container container) throws CustomServiceException {
-		return containerService.store(MainSingleton.getInstance().getUser(), container);
+		return longRequester.postObject(
+				BASE_URL+CREATE,
+				container, 
+				Long.class,
+				MainSingleton.getInstance().getUser());
+//		return containerService.store(MainSingleton.getInstance().getUser(), container);
 	}
 	/**
 	 * LIsta todos los contenedores en el sistema
@@ -39,7 +57,12 @@ public class ContainerServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public List<Container> list() throws CustomServiceException {
-		return containerService.list(MainSingleton.getInstance().getUser());
+		return listRequester.request(
+				BASE_URL+LIST, 
+				HttpMethod.GET, 
+				new ParameterizedTypeReference<List<Container>>() {}, 
+				MainSingleton.getInstance().getUser());
+//		return containerService.list(MainSingleton.getInstance().getUser());
 	}
 	/**
 	 * Actualiza la informacion del contenedor (el campo id debe estar cargado)
@@ -48,7 +71,13 @@ public class ContainerServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long update(Container container) throws CustomServiceException {
-		return containerService.update(MainSingleton.getInstance().getUser(), container);
+		return longRequester.postObject(
+				BASE_URL+UPDATE,
+				container, 
+				Long.class,
+				MainSingleton.getInstance().getUser());
+	
+//		return containerService.update(MainSingleton.getInstance().getUser(), container);
 	}
 
 	/**
@@ -58,7 +87,14 @@ public class ContainerServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Container find(long id) throws CustomServiceException {
-		return containerService.find(MainSingleton.getInstance().getUser(), id);
+		return objectRequester.request(
+				BASE_URL+FIND, 
+				HttpMethod.GET, 
+				new ParameterizedTypeReference<Container>() {},
+				id,
+				MainSingleton.getInstance().getUser()
+				);
+//		return containerService.find(MainSingleton.getInstance().getUser(), id);
 	}
 
 	/**
@@ -67,6 +103,9 @@ public class ContainerServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public void delete(long id) throws CustomServiceException {
-		containerService.delete(MainSingleton.getInstance().getUser(), id);
+		longRequester.delete(BASE_URL+DELETE, 	
+				id,
+				MainSingleton.getInstance().getUser());
+//		containerService.delete(MainSingleton.getInstance().getUser(), id);
 	}
 }

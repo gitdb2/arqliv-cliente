@@ -7,7 +7,17 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 
-	<bean id="shipClient" class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient">
-	</bean>
+	<bean id="shipClient"
+		class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ShipServiceClient"></bean>
+	<bean id="containerClient"
+		class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ContainerServiceClient"></bean>
+	<bean id="arrivalClient"
+		class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ArrivalServiceClient"></bean>
+	<bean id="reportsClient"
+		class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ReportsServiceClient"></bean>
+	<bean id="profilingClient"
+		class="uy.edu.ort.arqliv.obligatorio.client.services.clients.ProfilingServiceClient"></bean>
+	<bean id="departureClient"
+		class="uy.edu.ort.arqliv.obligatorio.client.services.clients.DepartureServiceClient"></bean>
 
 </beans>
