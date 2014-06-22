@@ -35,14 +35,14 @@ public class MenuProfilingMin {
 			
 			List<Pair<String, Long>> mins = client.minServiceTime(forDate);
 			
-			String titles = String.format("%-40s %-20s", "Servicio", "Tiempo minimo");
+			String titles = String.format("%-30s %-30s %-30s", "Servicio", "Tiempo minimo (nanosec)", "Tiempo minimo (milisec)");
 			List<String> lines = new ArrayList<>();
 			
 			if (mins.isEmpty()) {
 				lines.add(UtilsMenuProfiling.NO_RECORDS_FOUND_MSG + forDateString);
 			} else {
 				for (Pair<String, Long> pair : mins) {
-					lines.add(String.format("%-40s %-20d", pair.getKey(), pair.getValue()));
+					lines.add(String.format("%-30s %-30d %-30d", pair.getKey(), pair.getValue(), pair.getValue() / 1000000));
 				}
 			}
 			

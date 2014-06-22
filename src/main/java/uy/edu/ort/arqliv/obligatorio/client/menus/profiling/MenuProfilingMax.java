@@ -35,7 +35,7 @@ private final Logger log = LoggerFactory.getLogger(this.getClass());
 			
 			List<Pair<String, Long>> maxs = client.maxServiceTime(forDate);
 			
-			String titles = String.format("%-40s %-20s", "Servicio", "Tiempo maximo");
+			String titles = String.format("%-30s %-30s %-30s", "Servicio", "Tiempo maximo (nanosec)", "Tiempo maximo (milisec)");
 			
 			List<String> lines = new ArrayList<>();
 
@@ -43,7 +43,7 @@ private final Logger log = LoggerFactory.getLogger(this.getClass());
 				lines.add(UtilsMenuProfiling.NO_RECORDS_FOUND_MSG + forDateString);
 			} else {
 				for (Pair<String, Long> pair : maxs) {
-					lines.add(String.format("%-40s %-20d", pair.getKey(), pair.getValue()));
+					lines.add(String.format("%-30s %-30d %-30d", pair.getKey(), pair.getValue(), pair.getValue() / 1000000));
 				}
 			}
 			
@@ -65,7 +65,7 @@ private final Logger log = LoggerFactory.getLogger(this.getClass());
 		} else {
 			UtilsMenuProfiling.printToPdf(titles, 
 					lines, 
-					"C:/ORT/pdfs/profiling_avg_" + System.currentTimeMillis() + ".pdf", 
+					"C:/ORT/pdfs/profiling_max_" + System.currentTimeMillis() + ".pdf", 
 					"Maximo de tiempo de servicios");
 		}
 	}

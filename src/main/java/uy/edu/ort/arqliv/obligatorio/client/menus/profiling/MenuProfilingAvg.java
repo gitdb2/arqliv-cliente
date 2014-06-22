@@ -35,7 +35,7 @@ public class MenuProfilingAvg  {
 			
 			List<Pair<String, Double>> averages = client.avgServiceTime(forDate);
 			
-			String titles = String.format("%-40s %-20s", "Servicio", "Tiempo promedio");
+			String titles = String.format("%-30s %-30s %-30s", "Servicio", "Tiempo promedio (nanosec)", "Tiempo promedio (milisec)");
 			
 			List<String> lines = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class MenuProfilingAvg  {
 				lines.add(UtilsMenuProfiling.NO_RECORDS_FOUND_MSG + forDateString);
 			} else {
 				for (Pair<String, Double> pair : averages) {
-					lines.add(String.format("%-40s %-20.2f", pair.getKey(), pair.getValue()));
+					lines.add(String.format("%-30s %-30.2f %-30.2f", pair.getKey(), pair.getValue(), pair.getValue() / 1000000.0));
 				}
 			}
 			
