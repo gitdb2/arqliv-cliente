@@ -21,6 +21,7 @@ public class ShipServiceClient {
 
 	private String BASE_URL = "http://localhost:8080/arqliv-web/rest"+"/ships";
 	private String LIST = "/list?user={user}";
+	private String CREATE = "/create?user={user}";
 	
 	private RestRequester<List<Ship>> shipListRequester;
 	private RestRequester<Ship> shipRequester;
@@ -39,7 +40,14 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long create(Ship ship) throws CustomServiceException {
-		return 0L;
+
+		return longRequester.postObject(
+				BASE_URL+CREATE,
+				ship, 
+				Long.class,
+				MainSingleton.getInstance().getUser());
+
+		
 //		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 	/**
@@ -48,13 +56,11 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public List<Ship> list() throws CustomServiceException {
-		
-		
-//		List<Ship> ships = requester.request("http://localhost:8080/arqliv-web/rest/ships/list.json",
-//				HttpMethod.GET, new ParameterizedTypeReference<List<Ship>>() {});
-		
-		return shipListRequester.request(BASE_URL+LIST, HttpMethod.GET, new ParameterizedTypeReference<List<Ship>>() {}, MainSingleton.getInstance().getUser());
-//		return shipService.list(MainSingleton.getInstance().getUser());
+		return shipListRequester.request(
+					BASE_URL+LIST, 
+					HttpMethod.GET, 
+					new ParameterizedTypeReference<List<Ship>>() {}, 
+					MainSingleton.getInstance().getUser());
 	}
 	/**
 	 * Actualiza la informacion de un barco para una determinada 
