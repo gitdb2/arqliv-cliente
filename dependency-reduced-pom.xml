@@ -98,6 +98,7 @@
     </dependency>
   </dependencies>
   <properties>
+    <jackson.databind-version>2.3.0</jackson.databind-version>
     <slf4j.version>1.7.5</slf4j.version>
     <junit.version>4.11</junit.version>
     <java.version>1.7</java.version>
