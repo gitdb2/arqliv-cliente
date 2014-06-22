@@ -1,5 +1,6 @@
 package uy.edu.ort.arqliv.obligatorio.client.services.clients;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,6 @@ import org.springframework.http.HttpMethod;
 
 import uy.edu.ort.arqliv.obligatorio.client.rest.utils.RestRequester;
 import uy.edu.ort.arqliv.obligatorio.client.system.MainSingleton;
-import uy.edu.ort.arqliv.obligatorio.common.ShipService;
 import uy.edu.ort.arqliv.obligatorio.common.exceptions.CustomServiceException;
 import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
 
@@ -19,9 +19,13 @@ import uy.edu.ort.arqliv.obligatorio.dominio.Ship;
  */
 public class ShipServiceClient {
 
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	private String BASE_URL = "http://localhost:8080/arqliv-web/rest"+"/ships";
-	private String LIST = "/list?user={user}";
+	private String LIST   = "/list?user={user}";
 	private String CREATE = "/create?user={user}";
+	private String UPDATE = "/update?user={user}&arrivalDate={arrivalDate}";
+	private String FIND = "/find/{id}?user={user}";
+	
 	
 	private RestRequester<List<Ship>> shipListRequester;
 	private RestRequester<Ship> shipRequester;
@@ -46,9 +50,6 @@ public class ShipServiceClient {
 				ship, 
 				Long.class,
 				MainSingleton.getInstance().getUser());
-
-		
-//		return shipService.store(MainSingleton.getInstance().getUser(), ship);
 	}
 	/**
 	 * lista todos los barcos en el sistema
@@ -72,8 +73,12 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Long update(Ship ship, Date arrivalDate) throws CustomServiceException {
-		return 0L;
-		//return shipService.update(MainSingleton.getInstance().getUser(), ship, arrivalDate);
+		return longRequester.postObject(
+				BASE_URL+UPDATE,
+				ship, 
+				Long.class,
+				MainSingleton.getInstance().getUser(), 
+				sdf.format(arrivalDate));
 	}
 
 	/**
@@ -83,7 +88,14 @@ public class ShipServiceClient {
 	 * @throws CustomServiceException
 	 */
 	public Ship find(long id) throws CustomServiceException {
-		return null;
+		return shipRequester.request(
+				BASE_URL+FIND, 
+				HttpMethod.GET, 
+				new ParameterizedTypeReference<Ship>() {},
+				id,
+				MainSingleton.getInstance().getUser()
+				);
+
 		//return shipService.find(MainSingleton.getInstance().getUser(), id);
 	}
 
