@@ -188,7 +188,7 @@ public class MenuDepartureUpdate implements Renderer {
 					case 'S':
 						try {
 							exit = true;
-							long idGenerated = client.update(departure, shipid, containers);
+							long idGenerated = client.update(departure, shipid, containers, departure.getArrival().getId());
 							System.out.println("Arribo Modificado correctamente, id: " + idGenerated);
 						} catch (CustomServiceException e) {
 							log.error("Excepcion remota", e);

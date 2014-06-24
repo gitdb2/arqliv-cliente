@@ -23,8 +23,8 @@ public class DepartureServiceClient {
 	private final String ENTITY 	= "/departures";
 	private final String BASE_URL 	= SERVER + ENTITY;
 	private final String LIST   	= "/list?user={user}";
-	private final String CREATE 	= "/create?user={user}&shipId={shipId}&containers={containers}";
-	private final String UPDATE		= "/update?user={user}&shipId={shipId}&containers={containers}";
+	private final String CREATE 	= "/create?user={user}&shipId={shipId}&arrivalId={arrivalId}&containers={containers}";
+	private final String UPDATE		= "/update?user={user}&shipId={shipId}&arrivalId={arrivalId}&containers={containers}";
 	private final String FIND   	= "/find/{id}?user={user}";
 	private final String DELETE  	= "/delete/{id}?user={user}";
 
@@ -45,16 +45,18 @@ public class DepartureServiceClient {
 	 * @param departure
 	 * @param shipId
 	 * @param containers
+	 * @param arrivalId TODO
 	 * @return el id del departure creado
 	 * @throws CustomServiceException
 	 */
-	public Long create(Departure departure, Long shipId, List<Long> containers) throws CustomServiceException {
+	public Long create(Departure departure, Long shipId, List<Long> containers, Long arrivalId) throws CustomServiceException {
 		return longRequester.postObject(
 				BASE_URL+CREATE,
 				departure, 
 				Long.class,
 				MainSingleton.getInstance().getUser(), 
 				shipId,
+				arrivalId,
 				RestRequester.parametrizeLongList(containers));
 	}
 
@@ -80,16 +82,18 @@ public class DepartureServiceClient {
 	 * @param departure
 	 * @param shipId
 	 * @param containers
+	 * @param arrivalId TODO
 	 * @return
 	 * @throws CustomServiceException
 	 */
-	public Long update(Departure departure, Long shipId, List<Long> containers) throws CustomServiceException {
+	public Long update(Departure departure, Long shipId, List<Long> containers, Long arrivalId) throws CustomServiceException {
 		return longRequester.postObject(
 				BASE_URL+UPDATE,
 				departure, 
 				Long.class,
 				MainSingleton.getInstance().getUser(), 
 				shipId,
+				arrivalId,
 				RestRequester.parametrizeLongList(containers));
 	}
 

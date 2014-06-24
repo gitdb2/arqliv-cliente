@@ -49,6 +49,20 @@ public class MenuDepartureCreate implements Renderer {
 				}
 			}
 		}
+
+		
+		
+		
+		boolean forceArrivalId = true;
+		long arrivalId = 0;
+		do {
+			arrivalId = Keyin.inInt ("ID Arribo asociado (int): ");
+			if (arrivalId > 0) {
+				forceArrivalId = false;
+			} else {
+				System.out.println("Error el id de arribo debe ser > 0. Intente de nuevo");
+			}
+		} while (forceArrivalId);
 		
 		String shipDestination =  Keyin.inString("Pais de destino (string): ");
 		
@@ -105,7 +119,7 @@ public class MenuDepartureCreate implements Renderer {
 					DepartureServiceClient client = (DepartureServiceClient) ContextSingleton
 							.getInstance().getBean(RemoteClientsConstants.DepartureClient);
 
-					Long idGenerated = client.create(departure, shipId, containers);
+					Long idGenerated = client.create(departure, shipId, containers, arrivalId);
 					System.out.println("Partida creado correctamente con id: " + idGenerated);
 					exit = true;
 					
