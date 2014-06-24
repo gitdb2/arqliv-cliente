@@ -102,7 +102,7 @@ public class MenuDepartureCreate implements Renderer {
 
 		boolean exit = false;
 		while (!exit) {
-			DepartureMenuUtils.printDepartureCreate(departure, containers, shipId);
+			DepartureMenuUtils.printDepartureCreate(departure, containers, shipId, arrivalId);
 			char swValue = Keyin.inChar(" Dar de Alta (s/n): ");
 			
 			switch (swValue) {

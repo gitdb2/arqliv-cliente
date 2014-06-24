@@ -16,6 +16,7 @@ public class DepartureMenuUtils {
 		System.out.println("========= " + operation + " id: " + departure.getId());
 		System.out.println("===============================");
 		System.out.println("Fecha de partida:   " + sdfOut.format(departure.getDepartureDate()));
+		System.out.println("Id de Arrival:      " + departure.getArrival().getId());
 		System.out.println("Id de barco:        " + departure.getShip().getId());
 		System.out.println("Pais de Destino     " + departure.getShipDestination());
 		System.out.println("Ids contenedores:   " + generateContainerList(departure.getContainers()));
@@ -33,10 +34,11 @@ public class DepartureMenuUtils {
 		return ret;
 	}
 	
-	public static void printDepartureCreate(Departure departure, List<Long> contenedores,	long shipId) {
+	public static void printDepartureCreate(Departure departure, List<Long> contenedores, long shipId, long arrivalId) {
 		System.out.println("========================");
 		System.out.println("Fecha de partida:   " + sdfOut.format(departure.getDepartureDate()));
 		System.out.println("Id de barco:        " + shipId);
+		System.out.println("Id de Arrival:      " + arrivalId);
 		System.out.println("Pais de Destino:    " + departure.getShipDestination());
 		System.out.println("Ids contenedores:   " + contenedores);
 		System.out.println("Desc. Contenedores: " + departure.getContainersDescriptions());
